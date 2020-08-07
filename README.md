@@ -1,5 +1,5 @@
-# 박준우 블로그
+# 원영식
 
 <br>
 
-### https://junwoo45.github.io
+### https://youngsikwon.github.io
