@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 안녕하세요!
-subtitle: 프론트엔드 개발자 박준우입니다.
+subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 ---
 
 제 블로그에 방문해주셔서 감사합니다.
@@ -10,7 +10,7 @@ subtitle: 프론트엔드 개발자 박준우입니다.
 
 ## 저는
 
-- 복잡한 비즈니스 로직과는 별개로, 사용자가 경험할 유려한 UI를 고민합니다.
+- 문제 해결능력을 좋아하고, 협업주도적인 코드를 선호합니다. 
 - 동료 디자이너분의 디자인을 1px도 놓치지않고 구현해내려 합니다.
 - 주도적으로 참여할 수 있는 업무환경을 선호합니다.
 - 기록과 공유를 좋아합니다.
@@ -20,9 +20,9 @@ subtitle: 프론트엔드 개발자 박준우입니다.
 ---
 ## Experiences
 
-### NHN Toast / Frontend Engineer, 2020.07 ~
+### starbuck analysis 2020.3 ~
 
-### NHN Service / Frontend Engineer, 2020.05 ~ 2020.07
+### LF Mall  / software engineer, 2019.11 ~ 
 
 #### FE 교육 중 NHN Toast로 조직 이동
 
