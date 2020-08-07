@@ -1,17 +1,17 @@
 # --- General options --- #
 
 # Name of website
-title: 박준우블로그
+title: 원영식 블로그
 
 # Short description of your site
-description: 프론트엔드개발자, 자바스크립트를 좋아합니다.
+description: 문제해결능력, 파이썬을 애호가입니다.
 
 # --- Local development options ---
 # If your website is hosted locally rather than on GitHub, then you need to uncomment the next two parameters to set the url and baseurl
 # *** If you're not sure what this mean, then leave this section as it is. Only modify the url and baseurl if you know what you're doing!***
 
 # url is the the website domain URL without a trailing slash
-url: "https://junwoo45.github.io"
+url: "https://youngsikwon.github.io"
 
 # baseurl should be an empty string
 baseurl: ""
@@ -21,7 +21,7 @@ baseurl: ""
 # List of links in the navigation bar
 navbar-links:
   Archive: "archive"
-  TIL: "https://junwoo45til.netlify.com/#/"
+  TIL: "https://youngsikwon.netlify.com/#/"
   # Tags: "tags"
   About: "aboutme"
   
@@ -72,7 +72,7 @@ author:
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
   rss: true
-  email: "sinyoorang@gmail.com"
+  email: "youngsik3200g@gmail.com"
   # facebook: deanattali
   github: junwoo45
   # twitter: daattali
@@ -98,7 +98,7 @@ share-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "junwoo45.github.io"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "youngsik3200g.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Web Statistics Section --- #
 
@@ -123,7 +123,7 @@ google_analytics: "131311088"
 # --- Comments --- #
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-disqus: "junwoo45"
+disqus: "youngsikwon"
 
 # If you want to use JustComments fill with the API Key
 #just-comments: "ABCD-EFGH-IJKL"
