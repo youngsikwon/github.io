@@ -201,13 +201,13 @@ React native CLI로 프로젝트 시작 하기 위해서는 OS에 따라 설치�
 
 
 
-![img8](../img/react-n)
+![img8](../img/react-native2.png)
 
  react-native run-ios 실행 화면입니다.
 
 ![img9](../img/React-native3.png)
 
-
+---
 ![img10](../img/React-native4.png)
 
 
