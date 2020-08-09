@@ -180,7 +180,7 @@ React native CLI로 프로젝트 시작 하기 위해서는 OS에 따라 설치�
  XCode를 실행하고, 커멘드라인 툴을 설정 해주기 위해 메뉴 Preferences..를 선택 후 그 다음 메뉴에서 Locations를 선택하고,
  하단의 Command Line Tools를 최 신 버 전선택한다.
 
- ![img7](../img/React-native1.png)
+![img7](../img/React-native1.png)
 
 
 
@@ -201,14 +201,14 @@ React native CLI로 프로젝트 시작 하기 위해서는 OS에 따라 설치�
 
 
 
- ![img8](../img/React-native2.png)
+![img8](../img/React-native2.png)
 
  react-native run-ios 실행 화면입니다.
 
- ![img9](../img/React-native3.png)
+![img9](../img/React-native3.png)
 
 
- ![img10](../img/React-native4.png)
+![img10](../img/React-native4.png)
 
 
 
