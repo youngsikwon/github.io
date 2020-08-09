@@ -10,6 +10,7 @@ comments: true
 ---
 
 > 개요
+<br>
 > React- Native로 앱을 개발 하기 위해 MAC에서 개발 환경을 설정하는 방법을 알아볼 것입니다.
 
 
@@ -20,6 +21,55 @@ comments: true
 
  - 1. Expo CLI
  - 2. React Navite CLI
+
+
+
+React-Native로 앱을 개발하기 위해서는 NodeJS, Watchman, Xcode등을 설치 해야 합니다. 
+
+
+---
+
+### HomeBrew 설치
+
+Homebrew는 맥(Mac)에서 필요한 패키지를 설치하고 관리하는 맥(Mac)용 패키지 관리자입니다. Homebrew를 사용하려면 맥에서 간단하게 필요한 패키지를 설치 할 수 있습니다.
+
+ - HomeBrew : https://brew.sh/
+
+ 
+ ---
+ 
+ ### Nodejs 설치
+
+ react-native는 Javascrit이므로 javascrit의 런타임인 NodeJS가 필요합니다.
+  - Nodejs : https://nodejs.org/
+
+아래의 homebrew 명령어를 통해 nodejs를 설치 합니다.
+
+> brew install node
+ - 설치가 완료되면, 아래의 명령어를 통해 Nodejs가 제대로 설치 되었는지 확인합니다.
+
+> node -v
+
+Nodejs를 설치하면, 기본적으로 Nodejs 패키지 매너지인 npm(Node Package Manager)도 같이 설치 됩니다.
+NPM도 잘 설치가 되었는지 버전 확인 합니다.
+
+> npm -v
+
+---
+
+### Watchman 설치
+
+watchman은 특정 폴더나 파일을 감시 하다가 변화가 생기면, 특정 동작을 실행 하도록 설정 하는 역할을 합니다.
+React-Native에서는 소스코드의 추가, 변경이 발생하면 다시 빌드 하기 위해 Watchman을 사용하고 있습니다.
+ - Watchman : https://facebook.github.io/watchman/
+
+watchman을 설치 하기 위해 아래의 Homebrew 명령어를 실행합니다.
+
+> brew install watchman
+
+설치가 완료되었다면, 아래의 명령어를 실행하여 확인 해줍니다.
+
+> watchman -v
 
 
 
@@ -90,272 +140,79 @@ Expo 프로젝트 실행 방법
 
 
 
+> ## React Native CLI란?
 
+> 직접 네이티브로 어플리케이션을 개발 할 수 있다.
+> native file들을 직접 다를 수 있다.
 
 
+React Native의 장점
 
+ - 필요한 기능이 있는 경우, 모듈을 직접 만들어서 사용할 수 있다.
+ - 개발자가 원하는 언어로 추가적으로 작성 할 수 있다(kotlin, java, swift, object-c)
 
+React Native의 단점
 
-![img2](../img/devtools2.png)
+ - 초기 개발 환경 세팅 및 관리 운영에 비교적 많은 공수가 들어간다.
+ - MacOS 없이 ios를 개발할 수 없다.
+ - 배포, 업데이트 하는데 많은 시간이 소요 한다.
 
-여러분은 정말 크롬 개발자도구를 이해하고 있는가? 개발자도구는 개발 생산성을 높여주는 매우 강력하지만 잘 알려지지 않는 도구들을 제공한다.
 
-가장 유용한 기능들 몇가지를 소개할텐데, 도움이 되었으면 좋겠다.
 
-시작하기 전에, Command 메뉴를 소개하고 싶다. 리눅스에 셸(Shell)이 있듯, 크롬에는 Command 메뉴가 있다. Command 메뉴를 사용하여 명령어를 입력해서 크롬을 조작할 수 있다.
 
-먼저 크롬 개발자 도구를 연 뒤, 다음 단축키를 입력해 Command 메뉴를 열어보자.
+React Native CLI로 프로젝트 시작하기
 
-- windows : Ctrl + Shift + P
-- macOS : Cmd + Shift + P
 
-또는 아래 버튼을 눌러보자.
+React native CLI로 프로젝트 시작 하기 위해서는 OS에 따라 설치법이 다르다. (Mac)
 
-![img3](../img/devtools3.png)
 
-그러면 Command 패널로 진입할 수 있는데, 여기서 강력한 기능들을 가지고 있는 명령어들을 사용할 수 있다.
+ Homebrew를 이용하여 설치 해준다.
+ - 개발 OS가 MAC OS일 경우, ios / Android를 둘 다 지원 가능 
+  - brew install Node
+  - brew install Watchman (파일 시스템의 변화를 확인하는 Facebook 도구)
 
-![img4](https://miro.medium.com/max/1400/1*hk4R78EHvQqu2HmpUSLKyQ.gif)
+ - 개발 OS가 Window일 경우, Android만 가능하다.
+  - 설치 : Node, Python3 Jdk8
 
-<center>.  .  .</center>
 
-## 강력한 스크린샷 기능
 
-스크린샷은 자주 사용하는 기능중 하나이며, 세상에는 이미 편리한 스크린샷 소프트웨어들은 많이 있다. 하지만, 다음과같은 일들을 그 소프트웨어들로 할 수 있을까?
+ Xcode는 AppStore에서 다운 받을 수 있다. 
+ XCode를 실행하고, 커멘드라인 툴을 설정 해주기 위해 메뉴 Preferences..를 선택 후 그 다음 메뉴에서 Locations를 선택하고,
+ 하단의 Command Line Tools를 최 신 버 전선택한다.
 
-- 화면에 표시되지 않는 항목들까지 포함하여 웹페이지의 모든 것을 스크린샷찍고 싶은 경우
-- DOM요소의 내용을 정확하게 캡쳐하고 싶을 때
+ ![img7](../img/React-native1.jpeg)
 
-2가지 모두 흔한 경우지만, 스크린샷 도구들로는 쉽게 해결하기 어려운 경우다. 이러한 경우, Command메뉴에 명령어를 입력하면 아주 쉽게 해결할 수 있다.
 
-명령어는 다음과 같다:
 
-- Screenshot Capture full size screenshot
-- Screenshot Capture node screenshot
+여기까지 React Navtie를 시작하기 위한 준비 과정이었고, 본격적으로 React native를 설치 방법입니다.
 
-### 예시
 
-자, 어떠한 페이지도 좋다. 난 미디엄의 자바스크립트 페이지를 열어보겠다.
+1. 대부분 cd DEV 디렉토리 안에 따른 폴더 생성 후 사용 하시는걸 추천합니다! 
 
-[https://medium.com/tag/javascript](https://medium.com/tag/javascript)
+- $ npm install -g react-native-cli
 
-Command 메뉴를 열고 `Screenshot Capture full size screenshot` 을 실행시켜보자.
+- $ react-native init [프로젝트명]
 
-![img5](../img/devtools5.png)
+- // ios  $ react-native run-ios
 
-다음과 같이, 현재 페이지 전부를 담은 스크린샷을 얻을 수 있다.
+- // Android $ react-native run-android
 
-![img6](../img/devtools6.png)
 
-이 글에선 당신의 트래픽을 위해 압축된 이미지를 올렸지만, 원본 이미지는 매우 선명하다.
 
-마찬가지로, DOM 요소에 정확히 해당하는 스크린샷을 얻길 원할 때, 스크린샷 도구로는 완벽하게 해당 DOM 요소만을 캡쳐해내기란 번거로울 것이다.
 
-`Capture node screenshot` 을 사용해보자.
 
-우선, Elements 패널에서 요소를 선택한 뒤, 명령어를 실행해보자.
+ ![img8](../img/React-native2.jpeg)
 
-![img7](https://miro.medium.com/max/1400/1*wnV_7sPDF-qkNTVjINxSMw.gif)
+ react-native run-ios 실행 화면입니다.
 
-다음과 같이 정확한 스크린샷을 얻을 수 있다.
 
-![img7](../img/devtools7.png)
+  ![img9](../img/React-native3.jpeg)
 
-<br>
 
-## 콘솔의 마지막 실행 결과 참조
+  ![img10](../img/React-native4.jpeg)
 
-우리는 콘솔창에서 자주 디버깅한다.
-자바스크립트에서 문자열의 순서를 거꾸로 뒤집기 위해서, 웹에서 검색을 해보고, 다음과 같은 코드를 찾았다.
 
-```javascript
-"abcde".split("").reverse().join("");
-```
 
-![img8](../img/devtools8.png)
+> React Native CLI를 통해 생성한 프로젝트의 휴대폰을 실행
+> 다음 과 같은 화면이 뜨면 정상작동이 되는걸 확인할 수 있습니다. 
 
-자, 위의 코드는 문자열을 뒤집는다. 그러나 당신은 split(), reverse(), join() 메소드가 각각 무슨일을 하고, 각 단계에서 어떤 일들이 일어나고 있는지 이해하지 못한다고 치자. 그래서 위 코드를 순서대로 하나하나 실행시켜본다.
-
-![img9](../img/devtools9.png)
-
-이러한 과정을 거친 후에야, 각각의 메소드가 어떤 결과를 리턴하는지 알게 된다.
-
-근데 이 과정들은 너무 장황하다. 오류가 발생하기 쉬우면서도 이해하기 어렵다.
-
-사실, 콘솔창엔 이전 결과값을 참조하는 마법의 변수 `$_` 가 있다.
-
-![img10](../img/devtools10.png)
-
-`$_` 는 콘솔창에서 가장 마지막으로 연산한 결과값과 같은 값을 갖는 특수한 변수이다. 당신의 코드를 편리하게 디버깅해주는 기술이다.
-
-![img11](../img/devtools11.png)
-
-<br>
-
-## XHR 재요청
-
-프론트엔드 입장에선, 데이터를 얻기위한 리퀘스트를 백엔드로 날리기위해 XHR을 사용하는 일이 매우 흔하다. XHR 요청을 날린 후, 또 다시 요청을 날리고 싶다면 어떻게 할 것인가?
-
-신입 개발자들은 화면을 새로고침하는 방법을 택할 수 있겠지만, 이게 여간 귀찮은 일이 아니다. 우리는 Network 패널에서 바로 디버깅해볼 수 있다.
-
-![img12](../img/devtools12.png)
-
-- Network 패널을 연다.
-- XHR 버튼을 누른다.
-- 재요청하고싶은 XHR 요청을 선택한다.
-- Replay XHR
-
-gif 예시를 보자:
-
-![img 13](https://miro.medium.com/max/1400/1*0sAsVy7LP2Vrz4tDUleeLQ.gif)
-
-<br>
-
-## 화면 로딩 상태 추적하기
-
-페이지가 처음부터 완전히 로딩되기까지 10초이상 걸릴 수 있다. 이러한 경우라면, 페이지가 각각의 시간에 어떻게 로딩되고 있는지 확인해봐야할 수 있다.
-
-크롬 개발자도구에선, Network 패널의 `Capture Screenshots` 기능을 사용하여 페이지 로딩 스크린샷을 찍을 수 있다.
-
-![img14](https://miro.medium.com/max/1400/1*PIuIAKbuu-QaoAvVk02PiQ.gif)
-
-각 스크린샷을 클릭해서 해당 시점의 네트워크 요청을 확인할 수 있다. 이러한 시각적 프레젠테이션을 통해 매 순간 어떤 네트워크 요청이 일어나고 있는지 파악할 수 있다.
-
-![img 13](../img/devtools13.png)
-
-<br>
-
-## 변수 복사
-
-자바스크립트 변수를 다른 곳으로 복사할 수 있는가?
-
-불가능해보이지만, 크롬에서는 `copy` 라는 기능을 통해 변수를 복사할 수 있다.
-
-![gif14](https://miro.medium.com/max/1400/1*ybDqw0J2av8MyXOa208BcQ.gif)
-
-`copy` 는 ECMAScript 명세가 아닌, 크롬이 제공하는 기능이다. 이 기능을 통해, 자바스크립트 변수를 클립보드로 복사할 수 있다.
-
-<br>
-
-## 이미지를 data URI로 복사하기
-
-페이지에 있는 이미지를 처리하는 방법은 두가지가 있는데, 하나는 외부 자원 링크를 통해 로드하는 것이고, 다른 하나는 이미지를 [data URIs](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Data_URIs)로 인코딩하는 것이다.
-
-> **Data URIs**, 즉 `data:` 스킴이 접두어로 붙은 URL은 컨텐츠 작성자가 작은 파일을 문서 내에 인라인으로 임베드할 수 있도록 해줍니다.
-
-작은 이미지들을 Data URIs로 코드에 직접 임베드시키면 페이지가 해야할 HTTP 요청 수가 줄어들어서 페이지 로딩 속도가 빨라지게된다.
-
-그래서 크롬에서 어떻게하면 이미지를 data URIs로 바꿀 수 있을까?
-
-gif를 확인해 보자:
-
-![data uris gif](https://miro.medium.com/max/1400/1*u9NUH5zETqeRNFAi_IoYSg.gif)
-
-<br>
-
-## 테이블 객체 배열
-
-우린 다음과 같은 객체들의 배열을 가지고 있다.
-
-```javascript
-let users = [
-  { name: "Jon", age: 22 },
-  { name: "bitfish", age: 30 },
-  { name: "Alice", age: 33 },
-];
-```
-
-![img14](../img/devtools14.png)
-
-이러한 배열들은 콘솔창에서 파악하는 것이 쉽지 않다. 배열이 길어지면 길어질수록, 요소들이 복잡해지면 복잡해질수록, 이해하기 너무 어려워진다.
-
-크롬은 객체들의 배열을 표로 만들어주는 테이블 기능을 제공한다.
-
-![img15](../img/devtools15.png)
-
-<br>
-
-## Elements 패널에서의 드래그 앤 드랍
-
-때론, UI 테스트를 위해 페이지에서 특정 DOM 요소의 위치를 조정하고 싶어진다.
-
-Elements 패널에서 HTML 요소를 드래그 앤 드랍해서 페이지 전체의 위치를 변경할 수 있다.
-
-![drag and drop gif](https://miro.medium.com/max/1400/1*WYhLY0lxWtWz6j8aE2aRow.gif)
-
-Elements 패널에서 div 위치를 드래그하면, 웹 페이지의 div 위치가 동시에 변경되는 모습을 볼 수 있다.
-
-<br>
-
-## 콘솔창에서 현재 선택된 요소 참조
-
-`$0` 은 Elements 패널에서 현재 선택된 요소의 참조를 가지고 있는 또 다른 마법의 변수이다.
-
-![ref gif](https://miro.medium.com/max/1400/1*ue5Q24L7mtd4Py-ByRaWtQ.gif)
-
-<br>
-
-## CSS 가상 클래스(pseudo-class) 작동시키기
-
-> 의사 클래스를 사용하면 문서 트리 콘텐츠와 관련된 경우 뿐만 아니라 탐색기 히스토리([:visited](https://developer.mozilla.org/ko/docs/Web/CSS/:visited) 등), 콘텐츠의 상태(특정 폼 요소에 적용한 [`:checked`](https://developer.mozilla.org/ko/docs/Web/CSS/:checked) 등), 마우스의 위치(커서가 마우스 위인지 아닌지 알 수 있는 [:hover](https://developer.mozilla.org/ko/docs/Web/CSS/:hover) 등) 처럼 외부 인자와 관련된 경우에도 스타일을 적용할 수 있습니다.
-
-하나의 요소에 대해 여러 개의 가상 클래스를 작성할 수 있으며, 이러한 스타일을 쉽게 테스트하기 위해 Elements 패널에서 가상 클래스를 직접 작동시킬 수 있다.
-
-![img16](../img/devtools16.png)
-
-### 예시
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body {
-        font-size: 150px;
-      }
-
-      div:hover {
-        color: red;
-      }
-      div:active {
-        color: blue;
-      }
-      div:focus {
-        color: brown;
-      }
-    </style>
-  </head>
-  <body>
-    <div>hello world</div>
-  </body>
-</html>
-```
-
-위 html을 브라우저에서 연 뒤, Elements 패널에서 가상 클래스를 디버깅해보자.
-
-![pseudo-class gif](https://miro.medium.com/max/1400/1*Z1IM1QLjYkXSrYewiu5SLw.gif)
-
-<br>
-
-## 요소를 숨기는 단축키
-
-CSS 스타일을 디버깅할 때, 요소를 숨겨야할 때도 간혹 있다. 요소를 선택한 뒤 키보드의 `H` 키를 누르면, 요소를 빠르게 숨길 수 있다.
-
-![hide gif](https://miro.medium.com/max/1400/1*we_eVOTblCe60R-So8qncA.gif)
-
-이 단축키는 해당 요소에 `visibility: hidden !important;` 라는 스타일을 작성하는 것과 똑같은 기능을 수행한다.
-
-<br>
-
-## DOM 요소를 글로벌 임시 변수에 저장하기
-
-콘솔창에서 DOM 요소의 참조를 빠르게 얻고 싶을 때, 다음과 같이 하면 된다.
-
-- 요소 선택
-- 우클릭
-- Store as a global variable
-
-![global](https://miro.medium.com/max/1400/1*Y4WppAD9CTl-i55eSwIC3w.gif)
