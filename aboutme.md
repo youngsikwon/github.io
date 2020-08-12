@@ -39,7 +39,7 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 - Angular, TypeScript, RxJS, LESS, Python, MySQL
 - 회원관리 or DB설계
 - 업무지표 및 통계설계
-- 라우팅 이동 간 애니메이션 작업 등 유려한 UI 표현
+- 라우팅 이동 간 애니메이션 작업 등 유려한 UI 표현 
 - 프로젝트 문서화
 
 #### 관리자 콘솔 개발
@@ -60,10 +60,8 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 #### App Development
  - 주식마켓스토어 [공동사업]
-<<<<<<< HEAD
-=======
+
  - Simple Maket
->>>>>>> 8e79d0ec4a05d166121c9e5fd1b1ec09a5160bfe
 
 <br>
 
