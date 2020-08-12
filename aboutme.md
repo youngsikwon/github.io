@@ -60,6 +60,10 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 #### App Development
  - 주식마켓스토어 [공동사업]
+<<<<<<< HEAD
+=======
+ - Simple Maket
+>>>>>>> 8e79d0ec4a05d166121c9e5fd1b1ec09a5160bfe
 
 <br>
 
