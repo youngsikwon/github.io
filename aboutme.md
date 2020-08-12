@@ -55,6 +55,15 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 <br>
 
+
+## Plan
+
+#### App Development
+ - 주식마켓스토어 [공동사업]
+ - Simple Maket
+
+<br>
+
 ## Communities & Activities
 
 - [대한민국 개발자의 생존전략 인생 로드맵](https://www.onoffmix.com/event/205305){:target="_blank"}
