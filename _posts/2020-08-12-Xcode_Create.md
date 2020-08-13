@@ -17,7 +17,8 @@ comments: true
 
 ---
 
-## STEP 1 #### Xcode 실행하고 Create a New Xcode Project를 클릭하여 새 프로젝트 만들기
+
+## STEP 1  Xcode 실행하고 Create a New Xcode Project를 클릭하여 새 프로젝트 만들기
 
 
 ![img1](../img/xcode1.PNG)
