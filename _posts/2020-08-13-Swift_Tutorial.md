@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Swift의 기초문법 다지기!
-tags: [번역]
+tags: [Swift]
 comments: true
 ---
 
