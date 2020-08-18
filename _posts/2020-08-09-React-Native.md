@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mac용 리액트 네이티브 개발환경 구축.
-tags: [번역]
+tags: [React]
 comments: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Xcode 새 프로젝트 만들기 
-tags: [번역]
+tags: [Swift]
 comments: true
 ---
 
