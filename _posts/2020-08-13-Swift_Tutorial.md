@@ -182,8 +182,177 @@ let alsoMinusSix = +minusSic // alosoMinusSix는 -6
 ```
 
 
+#### 합성 할당 연산자(Compound Assignment Operators)
+
+a = a +2와 같이 할당연산(=)과 덧셈연산(+)으로 구성된 연산을 합성해 += 형태로 축약해 사용 가능합니다
 
 
+```swift
+
+var a = 1
+a += 2 
+// a는 3
+```
+>주의
+> 합성 할당 연산자는 값을 변환하지 않습니다. 즉, let b = a+2와 같은 문법은 사용할 수 없습니다.
+
+#### 비교 연산자(Comparison Operators)
+
+Swift에서는 표준 C에서 제공하는 비교 연산자는 모두 지원합니다.
+
+
+- 같다(a==b)
+- 같지않다(a != b)
+- 크다(a > b)
+- 작다(a < b)
+- 크거나 같다(a >= b)
+- 작거나 같다 (a <= b)
+
+> 주의
+> Swift는 객체 비교르 ㄹ위해 식별 연산자 === 과 !== 를 제공합니다.
+
+각 비교연산은 true 혹은 false을 반환합니다.
+```swift
+1 == 1 //true
+1 != 1 //true
+2 > 1 // true
+1 < 2 // true
+1 >= 1 //true
+2 <= 1 //false
+```
+
+비교 얀산은 if-else와 같은 조건 구문에서 자주 사용합니다.
+
+```swift
+
+let name == "World"
+if name == "world" {
+    print("hello, world")
+} else{
+    print("I'm sorry \(name), but I don't recognize you")
+}
+//print hello, world because name is indeed equal to "world"
+```
+- if문과 관련한 더 많은 정보는 [제어문 Control Flow](https://jusung.gitbook.io/the-swift-language-guide/language-guide/05-control-flow)
+같은 타입의 값을 갖는 두 개의 튜플을 비교할 수 있습니다. 튜플의 비교는 왼쪽에서 오른쪽 방향으로 이뤄지고 한번에 한 개의 값만 비교 합니다. 이 비교를 다른 두 값을 비교하게 될 때까지 수행합니다.
+
+```swift
+(1, "zebra") < (2, "apple")   // true, 1이 2보다 작고; zebra가 apple은 비교하지 않기 때문
+(3, "apple") < (3, "bird")    // true 왼쪽 3이 오른쪽 3과 같고; apple은 bird보다 작기 때문
+(4, "dog") == (4, "dog")      // true 왼쪽 4는 오른쪽 4와 같고 왼쪽 dog는 오른쪽 dog와 같기 때문
+```
+
+>Swift 표준 라이브러리에서는 7개 요소 미만을 갖는 튜플만 비교할 수 있습니다. 만약 7개 혹은 그 이상의 요소를 갖는 튜플을 비교하고 싶으면 직접 비교 연산자를 구현해야 합니다.
+
+
+#### 삼항 조건 연산자(Ternary Conditional Operator)
+
+삼항 조건 연산자는 question ? answer1 : answer2 의 구조를 갖습니다. 그래서 question 조건이 참인 경우 answer1이 거짓인 경우 answer2가 실행됩니다.
+삼항 조건 연산자는 아래 코드의 축약입니다.
+
+```swift
+if question{
+    answer1
+}else{
+    answer2
+}
+```
+
+> 삼항 조건 연산의 실제 예 입니다.
+
+```swift
+let contentHeight = 40
+let hasHeader = true
+let rowHeight = contenHegit + (hasHeader ? 50 : 20)
+// rowHeight는 90 (40 + 50)
+```
+
+>위에서 삼항 조건 연산을 다음과 같이 풀어 쓸 수 있습니다.
+
+
+```swift
+let contentHeight = 40
+let hasHeader = true
+let rowHeight: Int
+
+if hasHeader{
+    rowHeight = contentHeight  + 50
+}else {
+    rowHeight = contentHeight + 20
+}
+//rowHeight는 90입니다.
+```
+
+삼항 조건 연산자는 코드를 짧게 만들어 가속성을 높여줍니다.
+
+
+#### Nil 병합 연산자(Nil-Coalescing Operator)
+
+Nil 병합 연산자는 a ?? b 형태를 갖는 연산자입니다. 옵셔널 a를 벗겨서(unwraps) 만약 a가 nil인 경우 b를 반환합니다. 이 nul 병합 연산자는 다음 코드의 축약입니다.
+
+```swift
+a != nil ? a! : b
+```
+
+삼항 조건 연산자를 사용했는데, 옵셔널 a 가 nil 아니면 a를 unwrap하고 nil 이면 b를 반환하라는 의미입니다.
+
+ex)
+
+```swift
+let defaultColorName = "red"
+var userDefinedColorName: String? // 이 값은 defaults 값은 nil입니다.
+
+var colorNameToUse = userDefinedColorName ?? defultColorName
+// userDefinedColorName이 Nil이므로 colorNametoUse 값은 defaultColorname인 "red"로 설정됩니다.
+
+
+userDefinedcolorName = "greed"
+colorNameToUse = userDefinedColorName ?? defaultColorName
+// userDefinedColorName nil이 아니므로 colorName 는 "Greed"이 됩니다.
+```
+
+
+#### 범위 연산자(Range Operators)
+
+1. 닫힌 범위 연산자(Closed Range Oerators)
+
+(a..b) 의 형태로 범위의 시작과 끝이 있는 연산자 입니다. for-in loop에 자주 사용됩니다.
+
+```swift
+for idnex in 1...5 {
+print("\(index) times 5 is \(index * 5")
+}
+
+// 1 times 5 is 5
+// 2 times 5 is 10
+// 3 times 5 is 15
+// 4 times 5 is 20
+// 5 times 5 is 25
+```
+for-in loop에 관한 더 많은 정보는[제어문 Control Flow](https://jusung.gitbook.io/the-swift-language-guide/language-guide/05-control-flow)에서 보실 수 있습니다.
+
+
+2. 반 닫힌 범위 연산자(Half-open Range Operator)
+
+(a..b) 의 형태로 a 부터 b 보다 작을 때까지의 범위를 갖습니다. 즉, a 부터 b-1까지 값을 갖습니다. 이건 어디서 많이 본 범위! 그렇습니다. 보통 배열이 배열의 크기 -1의 인덱스를 갖기 때문에 이 반 닫힌 범우 ㅣ연산자는 배열을 다루는데 유용합니다.
+
+```swift
+
+let names = ["Anna", "Alex", "Brian", "Jack"]
+let count = names.count
+for i in 0..<count {
+    print("Person \(i + 1) is called \(names[i])")
+}
+// Person 1 is called Anna
+// Person 2 is called Alex
+// Person 3 is called Brian
+// Person 4 is called Jack
+```
+
+
+3. 단방향 범위(One-Side Ranges)
+
+[a..]
 
 
 
