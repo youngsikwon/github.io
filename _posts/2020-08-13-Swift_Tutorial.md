@@ -352,7 +352,125 @@ for i in 0..<count {
 
 3. 단방향 범위(One-Side Ranges)
 
-[a..]
+[a..] [..a] 의 형태로 범위의 시작 혹은 끝만 지정해 사용하는 범위 연산자입니다. 지정한 시작 값 혹은 끝 값은 범위에 포함됩니다.
+
+```swift
+for name in names[2...]{
+    print(name)
+}
+//Brian
+//Jack
+
+
+for name in names[...2]{
+    prin(name)
+}
+//Anna
+//Alex
+//Brian
+```
+
+위에서 설명 했듯이 지정한 시작 혹은 끝 값이 범위에 포함된 결과입니다. 하지만 앞서 설명드린 반 닫힌 연산자는 다음과 같이 설정 값이 범위에 포함되지 않습니다.
+
+```swift
+
+for name in names[..<2]{
+    print(name)
+} 
+//Anna
+//Alex
+```
+
+
+단방향 범위 연산자는 subscript뿐만 아니라 아래와 같이 특정 값을 포함 하는지 여부를 확인할 떄도 사용 가능합니다.
+
+
+```swift
+let range = ...5
+range.contains(7) // false
+range.contains(4) //true
+range.contains(-1) //true
+```
+
+#### 논리 연산자(Logical Operators)
+
+- Swift에서는 세가지 표준 논리 연산자를 지원합니다.
+
+ - 논리 부정 NOT(!a)
+ - 논리 곱 AND(a && b)
+ - 논리 합 OR (a || b)
+
+
+1. 논리 부정 연산자(Logical NoT Operator)
+
+```swift
+let allowedEntry = false
+
+if !allowebEntry {
+    print("ACCESS DENIED")
+}
+//print "ACCESS DENIED"
+```
+
+2. 논리 곱 연산자(Logical AND Operator)
+
+```swift
+let enteredDoorCode = true
+let passedRetinaScan = false
+if enteredDoorCode && passedRetinaScan {
+    print("Welcom!")
+} else {
+    print("ACCESS DENIED")
+}
+//prints "ACCESS DENIED"
+```
+
+
+3. 논리 합(OR) 연산자(Logical OR Operator)
+
+```swift
+let hasDoorKey = false
+let knowsOverridePassword = true
+if hasDoorKey || knowsOverridePassword{
+    print("Welcom!")
+}else{
+    print("ACCESS DENIED")
+}
+// print("welcome!)
+```
+
+
+4. 논리 연산자의 조합(Combining Logical Operator)
+
+두 개 이상의 논리 연산자를 조합해서 사용할 수 있습니다.
+
+```swift
+if enteredDoorCode && passedRetinaScan || hasDoorKey || knowsOverridePassword {
+    print("Welcome!")
+} else {
+    print("ACCESS DENIED")
+}
+// Prints "Welcome!"
+```
+> Swift의 논리 연산자 && 와 || 는 왼쪽의 표현을 우선해서 논리 계산을 합니다.
+
+
+5. 명시적 괄호(Explicit Parentheses)
+
+논리 연자의 적용 우선 순위를 연산자에 맡기지 않고 명시적으로 괄호를 사용해 계산 순서를 지정 할 수 있습니다.
+
+
+```swift
+
+if (enteredDoorCode && passedRetinaScan) || hasDoorKey || knowsOverridePassword {
+    print("Welcome!")
+} else {
+    print("ACCESS DENIED")
+}
+// Prints "Welcome!"
+```
+
+이렇게 괄호를 사용하면 가독성시 높아져 코드의 의도를 좀 더 명확하게 전달 하는데 있어서 도움이 된다.
 
 
 
