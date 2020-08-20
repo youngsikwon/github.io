@@ -18,33 +18,34 @@ comments: true
 - Foundation
  - 프로그램의 중심을 담당하는 프레임워크이다. 사실 가장 기본적인 원시 데이터 타입(String, Int, Double)부터가 foundation 에 포함되어있기 때문에, 프레임워크를 상속하지 않으면 아무것도 없다고 봐도 무방하다.
 
- - 1. 기본
-  Number, data, String : 원시 데이터 타입 사용
-  Collection : Array, Dictionary, set 등과 같은 컬렉션 타입 사용
-  Data and Time : 날짜와 시간을 계산하거나 비교하는 직업
-  Unit and Measurement : 물리적 차원을 숫자로 표현 및 관련 단위 간 변환 가능
-  Data Formatting : 숫자, 날짜, 측정값 등을 문자열로 변환 또는 반대 작업
-  Filter and Sorting : 컬렉션 요소를 검사하거나 정렬하는 작업
+ - 1. 기본<br>
+  Number, data, String : 원시 데이터 타입 사용<br>
+  Collection : Array, Dictionary, set 등과 같은 컬렉션 타입 사용<br>
+  Data and Time : 날짜와 시간을 계산하거나 비교하는 직업<br>
+  Unit and Measurement : 물리적 차원을 숫자로 표현 및 관련 단위 간 변환 가능<br>
+  Data Formatting : 숫자, 날짜, 측정값 등을 문자열로 변환 또는 반대 작업<br>
+  Filter and Sorting : 컬렉션 요소를 검사하거나 정렬하는 작업<br>
 
-- 2. 애플리케이션 지원
-  Resources : 애플리케이션의 에셋과 번들 데이터에 접근 지원
-  Notification : 정보를 퍼뜨리거나 받아들이기는 기능 지원
-  App Extension : 확장 애플리케이션과의 상호작용 직원
-  Error and Exceptions : API와의 상호작용에서 발생할 수 있는 문제 상황에 대처할 수 있는 기능 지원
+- 2. 애플리케이션 지원<br>
 
-
-
-- 3. 파일 및 데이터 관리
-
-  File System : 파일 또는 폴더를 생성하고 읽고 쓰는 기능 관리
-  Archives and Serialization : 속성 목록, JSON, 바이너리 파일들을 객체로 변환 또는 반대 작업 관리
-  iCloud : 사용자의 ICloud 계정을 이용해 데이터를 동기화하는 작업 관리
+  Resources : 애플리케이션의 에셋과 번들 데이터에 접근 지원<br>
+  Notification : 정보를 퍼뜨리거나 받아들이기는 기능 지원<br>
+  App Extension : 확장 애플리케이션과의 상호작용 직원<br>
+  Error and Exceptions : API와의 상호작용에서 발생할 수 있는 문제 상황에 대처할 수 있는 기능 지원<br>
 
 
-- 4. 네트워킹
+
+- 3. 파일 및 데이터 관리<br>
+
+  File System : 파일 또는 폴더를 생성하고 읽고 쓰는 기능 관리<br>
+  Archives and Serialization : 속성 목록, JSON, 바이너리 파일들을 객체로 변환 또는 반대 작업 관리<br>
+  iCloud : 사용자의 ICloud 계정을 이용해 데이터를 동기화하는 작업 관리<br>
+
+
+- 4. 네트워킹<br>
  
-   URL Loading System : 표준 인터넷 프로토콜을 통해 URL과 상호작용하고 서버와 통신하는 작업
-   Bonjour : 로컬 네트워크를 위한 작업
+   URL Loading System : 표준 인터넷 프로토콜을 통해 URL과 상호작용하고 서버와 통신하는 작업<br>
+   Bonjour : 로컬 네트워크를 위한 작업<br>
 
 ---
 
@@ -314,7 +315,7 @@ for index in greeting.indices {
 
 문자의 삽입과 삭제에는 `insert(:at:)`, `insert(contentsOf:at:)`, `remove(at:`) 메소드를 사용할 수 있습니다.
 
-> 주의
+> 주의<br>
 > 위 메소드들은 RangeReplaceableCollection 프로토콜을 따르는 Array, Dictionary, Set 등에서도 동일하게 사용할 수 있습니다.
 
 ```swift
@@ -352,11 +353,11 @@ let newString = String(beginning)
 
 위와 같이 사용해야하는 것이 좋은 이유는 메모리 관리 때문입니다. SubString은 해당 문자를 직접 갖고 있는 것이 아니라 원본 String의 메모리를 참조해 사용합니다.
 
-![img1](../img/string_ime2.png)
+![img2](../img/String_ime2.png)
 
 그래서 SubString을 계속 이용하는 이상은 원본 String이 계속 메모리에 남아 있게 됩니다. 사용하지 않는 문자열까지도 남게 되는 것이죠. 그렇게 때문에 SubString을 오래 사용하고자 한다면 위 예제처럼 String에서 인스턴스로 만들어 사용하고자 하는 문자만 메모리에 올려놓고 사용하는 것이 관리 효율면에서 좋다고 할 수 있습니다.
 
-> 주의
+> 주의<br>
 > String과 Substring 모두 StringProtocol을 따릅니다. 그래서 문자 조작에 필요하고 편리한 메소드들을 공통으로 사용할 수 있습니다.
 
 
@@ -394,5 +395,114 @@ if eAcuteQuestion == combinedEAcuteQuestion {
 
 ```swift
 
+let latinCapitalLetterA: Character = "\u{41}"
 
+let cyrillicCapitalLetterA: Character = "\u{0410}"
+
+if latinCapitalLetterA != cyrillicCapitalLetterA {
+    print("These two characters are not equivalent.")
+}
+// Prints "These two characters are not equivalent."
+```
+
+> 주의 <br>
+>Swift에서 문자열과 문자의 비교는 언어를 고려하지 않습니다. 다시말해, 언어와 상관없이 같은 문자면 같은 문자로 취급합니다.
+
+<br>
+
+## 접두사와 접미사 비교
+
+접두사와 접미사의 비교를 위해 `hasPrefix(:)`, `hasSuffix(:)` 메소드를 사용할 수 있습니다.
+
+```swift
+let romeoAndJuliet = [
+    "Act 1 Scene 1: Verona, A public place",
+    "Act 1 Scene 2: Capulet's mansion",
+    "Act 1 Scene 3: A room in Capulet's mansion",
+    "Act 1 Scene 4: A street outside Capulet's mansion",
+    "Act 1 Scene 5: The Great Hall in Capulet's mansion",
+    "Act 2 Scene 1: Outside Capulet's mansion",
+    "Act 2 Scene 2: Capulet's orchard",
+    "Act 2 Scene 3: Outside Friar Lawrence's cell",
+    "Act 2 Scene 4: A street in Verona",
+    "Act 2 Scene 5: Capulet's mansion",
+    "Act 2 Scene 6: Friar Lawrence's cell"
+]
+```
+
+다음 코드는 문자열 배열에서 접두어 `Act 1`가 몇개 들어있는지 확인하는 코드입니다.
+
+```swift
+var act1SceneCount = 0
+for scene in remeoAndJuliet{
+    if scene.hasPrefix("Act 1"){
+        act1SceneCount += 1
+    }
+}
+print("Thers are \(act1SceneCount) scenes in Act 1")
+```
+다음 코드는 문자열 배열에서 접미어 `Capulet's mansion`과 `Friar Lawrences cell` 이 각각 몇개 들어있는지 확인하는 코드 입니다.
+
+```swift
+
+var mansionCount = 0
+var cellCount = 0
+for scene in remeoAndJuliet {
+    if scene.hasSuffix("Capulet's mansion") {
+        mansionCount += 1
+    } else if scene.hasSuffix("Friar Lawrence's cell") {
+        cellCount += 1
+    }
+}
+print("\(mansionCount) mansion scenes; \(cellCount) cell scenes")
+// 6 mansion scenes; 2 cell scenes
+```
+
+# 문자열의 유니코드 표현
+---
+유니코드 문자가 텍스트 파일이나 다른 저장소에 쓰여질 때 유니코드 스칼라는 UTF-8, UTF-16, UTF-32 등 다양한 유니코드 인코딩 방식이 사용됩니다.
+```swift
+let dogString = "Dog!!"
+```
+
+![img2](../img/String_ime3.png)
+
+```swift
+for codeUnit in dogString.utf8{
+    print("\(codeUnit) ", terminator: "")
+}
+print("")
+// 68 111 103 226 128 188 240 159 144 182
+```
+
+UTF-16 표현
+
+![img2](../img/String_ime4.png)
+
+```swift
+for codeUnit in dogString.utf16{
+    print("\(codeUnit) ", terminator: "")
+}
+print("")
+// 68 111 103 8252 55357 56374
+```
+
+유니코드 스칼라표현
+
+![img2](../img/String_ime5.png)
+
+
+```swift
+for scalar in dogString.unicodeScalars {
+    print("\(scalar.value) ", terminator: "")
+}
+print("")
+// 68 111 103 8252 128054
+```
+
+
+```swift
+for scalar in dogString.unicodeScalars{
+    print("\(scalar)")
+}
 ```
