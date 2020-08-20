@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Swift의 기초문법 다지기!
+title: Swift 기본 연산자
 tags: [Swift]
 comments: true
 ---

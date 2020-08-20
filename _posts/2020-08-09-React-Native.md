@@ -118,7 +118,7 @@ Expo 프로젝트 실행 방법
 
  - 명령어를 입력하면, template를 선택해 줄 수 있다. 기본으로 Black를 선택
 
-![img4](../img/Expo2.png)
+![img4](../img/String_img.png)
 
 - Black 선택후, app의 일므을 원하는대로 적어주고 엔터를 눌러주면 프로젝트 생성.
 

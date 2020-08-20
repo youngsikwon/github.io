@@ -1,0 +1,398 @@
+---
+layout: post
+title: Swift 문자열과 문자
+tags: [Swift]
+comments: true
+---
+
+# Swift를 배우고자 하는 초심자를 위한 가이드북입니다.
+
+---
+
+### 개요
+<br>
+> Swift의 `String`은 `Foundation` 프레임워크의 `NSString` 이 `Bridge` 된 타입이기 때문에 `NSString` 의 메소드를 `String` 에서 캐스팅 없이 사용 가능합니다.
+
+---
+
+- Foundation
+ - 프로그램의 중심을 담당하는 프레임워크이다. 사실 가장 기본적인 원시 데이터 타입(String, Int, Double)부터가 foundation 에 포함되어있기 때문에, 프레임워크를 상속하지 않으면 아무것도 없다고 봐도 무방하다.
+
+ - 1. 기본
+  Number, data, String : 원시 데이터 타입 사용
+  Collection : Array, Dictionary, set 등과 같은 컬렉션 타입 사용
+  Data and Time : 날짜와 시간을 계산하거나 비교하는 직업
+  Unit and Measurement : 물리적 차원을 숫자로 표현 및 관련 단위 간 변환 가능
+  Data Formatting : 숫자, 날짜, 측정값 등을 문자열로 변환 또는 반대 작업
+  Filter and Sorting : 컬렉션 요소를 검사하거나 정렬하는 작업
+
+- 2. 애플리케이션 지원
+  Resources : 애플리케이션의 에셋과 번들 데이터에 접근 지원
+  Notification : 정보를 퍼뜨리거나 받아들이기는 기능 지원
+  App Extension : 확장 애플리케이션과의 상호작용 직원
+  Error and Exceptions : API와의 상호작용에서 발생할 수 있는 문제 상황에 대처할 수 있는 기능 지원
+
+
+
+- 3. 파일 및 데이터 관리
+
+  File System : 파일 또는 폴더를 생성하고 읽고 쓰는 기능 관리
+  Archives and Serialization : 속성 목록, JSON, 바이너리 파일들을 객체로 변환 또는 반대 작업 관리
+  iCloud : 사용자의 ICloud 계정을 이용해 데이터를 동기화하는 작업 관리
+
+
+- 4. 네트워킹
+ 
+   URL Loading System : 표준 인터넷 프로토콜을 통해 URL과 상호작용하고 서버와 통신하는 작업
+   Bonjour : 로컬 네트워크를 위한 작업
+
+---
+
+
+# 문자열과 문자 (String and Characters)
+---
+
+
+## 문자열 리터럴
+---
+문자열은 큰 따옴표 (")로 묶어 표현합니다.
+
+```swift
+let something = "Some String literal value"
+```
+
+### 여러줄 문자열 리터럴
+
+여러줄의 문자열을 사용하고 싶은 경우 큰 따옴표(""")로 묶어서 사용할 수 있습니다.
+
+```swift
+let quotation = """
+the White put on his spectacles. "Where shall I begin,
+please your Majesty?" he asked.
+
+
+"Begin at the beginning," the King said gravely, "and go on till you cme to the end; then stop."
+"""
+
+```
+
+여러줄 문자열을 사용할 떄는 첫 시작의 `"""` 다음 줄부터 마지막 `"""`의 직전까지를 문자열로 봅니다. 그래서 아래 두 줄의 표현으로 이루어진 `singleLineString' 과 'multilienString' 은 같은 값을 갖게 도비니다.
+
+```swift
+let singleLineString = "These are the same."
+let multilineString = """These are the same."""
+```
+
+여러줄 문자열을 사용하며 줄바꿈을 하고 싶으면 백슬래쉬 `\`를 사용합니다.
+
+```swift
+
+let softWrappedQuotation  = """
+
+The White Rabbit put on his sectacles. "Where shall I begin, \
+please your Majesty?" he asked.
+
+"Begin at the beginning," the King said gravely, "and go on \
+till you come to the end; then stop."
+```
+
+문자열의 시작과 끝에 각각 빈줄을 넣고 싶다면 한 줄을 띄어서 문자열을 입력하면 됩니다.
+
+```swift
+let lineBreaks = """
+
+This String starts with a line break.
+It also ends with a line break.
+```
+
+들여쓰기도 가능합니다. 들여쓰기 기준은 끝나는 지점의 `"""`의 위치입니다. 아래의 경우는 닫는 `"""` 위치 앞에 있는 문자들은 전부 무시되고 그 이후의 공백은 문자열에 반영됩니다.
+
+![img1](../img/String_img.png)
+
+
+
+### 문자열 리터럴의 특수 문자
+
+문자열 리터럴은 다음과 같은 특수 문자를 포함할 수 있습니다.
+
+ * `\0`, `\`, `\t`, `\n`, `\r`, `\”`, `\’`
+ * `\u{n}`, n은 1-8자리 십진수 형태로 구성된 유니코드
+ * `\n{n}`, n은 1-8자리 십진수 형태로 구성된 유니코드
+
+
+```swift
+let wiseWords = "\"Imagination is more important than knowledge\" - Eistein"
+// "Imagination is more important than knowlege" - Einstein
+let dollaSign = "\u{24}"            // $, 유니코트 U+0024
+let blackHeart = "\u{2665}"         // ♥, 유니코드 U+2665
+let sparklingHeart = "\u{1F496}" // 💖,유니코드 U+1F496
+```
+---
+
+# 빈 문자열 초기화
+---
+
+아래 예의 두 변수의 문자열 값은 같습니다.
+
+```swift
+var emtpyString = ""
+var anotherEmptyString = String()
+```
+
+문자열이 비어있는지 여부를 확인하기 위해서는 `isEmpty` 프로퍼티를 이용합니다.
+
+```swift
+
+if emptyString.isEmpty{
+    print("Nothing to see here")
+}
+//prints "Nothing to see here"
+```
+
+## 문자열 수정 
+
+```swift
+var variableString = "Horese"
+variableString = " and carriage"
+//variableString = Horse and carriage
+
+let constantString = "Highlander"
+
+constantString += " and another Highlander"
+// 문자열 상수(let)로 선언되 있어 에러발생.
+```
+
+# 값 타입 문자열
+---
+Swift의 `String`은 값 타입(value type)입니다. 그래서 `String`이 다른 함수 혹은 메소드로 부터 생성되면 `String`값이 할당 될 때, 이전 `String`의 레퍼런스를 할당하는 것이 아니라 값을 복사해서 생성합니다. 반대로 야기 하자면 다른 메소드에서 할당 받은 문자열은 그 문자열으 수정해도 원본 문자열이 변하지 않기 때문에 편하게 사용하셔도 됩니다.
+
+## 문자
+---
+문자열의 개별 문자를 `for-in` loop을 사용해 접근할 수 있습니다.
+
+```swift
+
+for character in "Dog!🐶" {
+    print(character)
+}
+// D
+// o
+// g
+// !
+// 🐶
+```
+
+다음과 같이 문자 상수를 선언할 수 있습니다.
+```swift
+
+let exclamationMark : Character = "!"
+```
+문자 배열을 이용해 문자열의 초기화 메소드에 인자로 넣어 문자열을 생성할 수 있습니다.
+
+```swift
+let catCharacters: [Character] = ["C", "a", "t", "!", "🐱"]
+let catString = String(catCharacters)
+print(catString)
+// Prints "Cat!🐱"
+```
+
+# 문자열과 문자의 결합
+---
+```swift
+
+let String1 = "hello"
+let String2 = "there"
+let welcome = string1 + string2
+// welcome : "hello thers"
+```
+
+```swift
+var instruction = "look over"
+instruction += string2
+// instruction : "look over there"
+```
+
+```swift
+let exclamationMark: Character = "!"
+welcome.append(exclamat)
+```
+
+# 문자열 삽입
+---
+백슬래쉬 괄호를 이용해 상수, 변수, 리터럴 값을 문자열에 추가할 수 있습니다.
+
+```swift
+let mutiplier = 3
+let message = "\(miltiplier) time 2.5 is \(Double(miltiplier)) * 2.5)"
+// message : "3 times 2.5 is 7.5"
+```
+
+# 유니코드
+---
+
+ - 유니코드는 전 세계의 모든 문자를 컴퓨터에서 일관되게 표현하고 다룰 수 있도록 설계된 국제 표준입니다. Swift의 문자열과 문자 타입은 유니코드에 순응(compliant)합니다.
+
+
+ 유니코드 스칼라
+
+ Swift의 네이티브 문자열 타입은 유니코드 스칼라 값으로 만들어 졌습니다. 하나의 유니코드는 21비트의 숫자로 굿어돼 있습니다. 예를 들면 `U+0061`는 라틴어의 소문자 `a`를 나타내고 `U+1F425`는 정면의 병아리를 나타냅니다.
+
+
+ 자모 그룹의 확장
+
+ 유니코드를 결합해서 사용할 수 있습니다.
+
+ ```swift
+  let eAcute: Character = "\u{E9}"  // é
+  let combinedEAcute: Character = "\u{65}\u{301}"  // e +  ́
+  // eAcute : é, combinedEAcute : é
+ ```
+
+ 아래는 한글의 `한`자를 단독으로 사용했을 때와 `ㅎ`,`ㅏ`,`ㄴ`의 자모를 따로 결합해서 사용한 예 입니다.
+
+ ```swift
+ let precomposed: Character = "\u{D55C}"     // 한
+  let decomposed: Character = "\u{1112}\u{u1161}\u{11AB}"    // ㅎ, ㅏ,ㄴ
+  // precomposed : 한, decomposed 한
+ ```
+ 아래는 é(E9)와 원심볼(20DD)을 결합한 결과입니다.
+ ```swift
+ let enclosedEAcute: Character = "\u{E9}\u{20DD}"
+  // enclosedEAcute : é⃝
+ ```
+ 아래는 지역심볼문자인 U(1F1FA)와 S(1F1F8)를 결합한 결과입니다.
+
+```swift
+  let regionalIndicatorForUS: Character = "\u{1F1FA}\u{1F1F8}"
+  // regionalIndicatorForUS : 🇺🇸
+```
+## 문자 세기
+- 문자열의 문자의 순자를 세기 위해서는 문자열의 `count` 프로퍼티를 이용합니다.
+```swift
+ let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
+  print("unusualMenagerie has \(unusualMenagerie.count) characters")
+  // "unusualMenagerie의 문자는 40개"
+```
+
+## 문자열의 접근과 수정
+
+문자열의 수정과 접근은 문자열 메소드 혹은 프로퍼티를 이용하거나 서브스크립트(subscript) 문법을 이용해 할 수 있습니다.
+
+- 문자열 인덱스
+ - 아래와 같이 `startIndex`, `endIndex`, `index(before:)`, `index(after:)`, `index(_:offsetBy)` 메소드 등을 이용해 문자열에서 특정 문자에 접근 할 수 있습니다.
+
+ > 주의
+ > 위 메소드들은 Collection 프로포토콜을 따르는 Array, Dictionary, Set 등에서도 동일하게 사용할 수 있습니다.
+
+ ```swift
+let greeting = "Guten Tag!"
+greeting[greeting.startIndex]
+//G
+greeting[greeting.index(before: greeting.endIndex)]
+//!
+greeting[greeting.index(after: greeting.startIndex)]
+//u
+let index = greeting.index(greeting.startIndex, offsetBy: 7)
+greeting[index]
+// a
+ ```
+
+문자열의 인덱스를 벗어나느 문자를 가져오려고 하면 런타임 에러가 발생합니다.
+```swift
+greeting[greeting.endIndex] // 에러!
+greeting.index(after: greeting.endIndex) //에러!
+```
+
+문자열의 개별 문자를 접근 하기 위해서는 indices 프로퍼티를 사용합니다.
+```swift
+for index in greeting.indices {
+    print("\(greeting[index]) ", terminator: "")
+// G u t e n  T a g !
+```
+
+## 문자의 삽입과 삭제
+
+문자의 삽입과 삭제에는 `insert(:at:)`, `insert(contentsOf:at:)`, `remove(at:`) 메소드를 사용할 수 있습니다.
+
+> 주의
+> 위 메소드들은 RangeReplaceableCollection 프로토콜을 따르는 Array, Dictionary, Set 등에서도 동일하게 사용할 수 있습니다.
+
+```swift
+var welcome = "hello"
+welcome.insert("!", at: welcome.endIndex)
+// welcome : hello!
+
+welcome.insert(contentsOf: " there", at: welcome.index(before: welcome.endIndex))
+// welcome : hello there!
+```
+
+```swift
+welcome.remove(at: welcome.index(before: welcome.endIndex))
+// welcome : hello there
+
+let range = welcome.index(welcome.endIndex, offsetBy: -6)..<welcome.endIndex
+welcome.removeSubrange(range)
+//welcome : hello
+```
+---
+
+# 부분 문자열
+---
+문자열에서 부분문자를 얻기 위해 `prefix(_:)`와 같은 서브스크립트 메소드를 이용할 수 있는데, 그렇게 얻은 부분 문자열은 문자열(String) 인스턴스가 아니라 부분문자열(SubString) 인스턴스 입니다. 만약 부분 문자열을 단기간에 사용하는게 아니라 오랜기간 사용한다면 문자열 인스턴스로 바꿔서 사용하는게 좋습니다.
+
+```swift
+let greeting = "Hello World!"
+let index = greeting.index(of: ",") ?? greeting.endIndex
+let beginning  = greeting[..<index]
+// beginning : Hello
+
+//SubString인 beginning을 String으로 변환
+let newString = String(beginning)
+```
+
+위와 같이 사용해야하는 것이 좋은 이유는 메모리 관리 때문입니다. SubString은 해당 문자를 직접 갖고 있는 것이 아니라 원본 String의 메모리를 참조해 사용합니다.
+
+![img1](../img/string_ime2.png)
+
+그래서 SubString을 계속 이용하는 이상은 원본 String이 계속 메모리에 남아 있게 됩니다. 사용하지 않는 문자열까지도 남게 되는 것이죠. 그렇게 때문에 SubString을 오래 사용하고자 한다면 위 예제처럼 String에서 인스턴스로 만들어 사용하고자 하는 문자만 메모리에 올려놓고 사용하는 것이 관리 효율면에서 좋다고 할 수 있습니다.
+
+> 주의
+> String과 Substring 모두 StringProtocol을 따릅니다. 그래서 문자 조작에 필요하고 편리한 메소드들을 공통으로 사용할 수 있습니다.
+
+
+문자열 비교 Swift에서는 문자열과 문자, 접두사, 접미사를 비교하는 방법을 제공합니다.
+
+
+## 문자열과 문자 비교
+
+문자열과 문자 비교에는 `==` 혹은 `!=` 연산자를 사용합니다.
+
+```swift
+let quotation = "We're a lot alike, you and I."
+let sameQuotation = "We're a lost alike, you and I."
+if quotation == sameQuotation {
+    print("These two strings are considered equal")
+}
+// These two strings are considered equal 출력
+```
+
+유니코드는 결합된 문자열을 갖고 비교하게 됩니다.
+
+```swift
+// "Voulez-vous un café?" using LATIN SMALL LETTER E WITH ACUTE
+let eAcuteQuestion = "Voulez-vous un caf\u{E9}?"
+
+// "Voulez-vous un café?" using LATIN SMALL LETTER E and COMBINING ACUTE ACCENT
+let combinedEAcuteQuestion = "Voulez-vous un caf\u{65}\u{301}?"
+
+if eAcuteQuestion == combinedEAcuteQuestion {
+    print("These two strings are considered equal")
+}
+// These two strings are considered equal 출력
+```
+같은 유니코드 문자여도 유니코드가 다르면 다른 문자로 판별합니다. 아래 예제는 영어의 알파벳 대문자 `A(U+0041)`와 러시아어에서 사용되는 대문자`(A(U+0410)`를 비교한 것입니다.
+
+```swift
+
+
+```
