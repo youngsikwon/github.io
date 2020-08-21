@@ -281,6 +281,103 @@ for genre in favoriteGenres{
 
 <br>
 
+```swift
+let oddDigits: Set = [1, 3, 5, 7, 9]
+let evenDigits: Set = [0, 2, 4, 6, 8]
+let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
 
 
+oddDigits.union(evenDigits).sorted()
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+oddDigits.intersection(evenDigits).sorted()
+// []
+oddDigits.subtracting(singleDigitPrimeNumbers).sorted()
+// [1, 9]
+oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()
+// [1, 2, 9]
+```
+- union : 합집합으로 두 Set을 합쳐 새로운 Set을 만듭니다.
+- subtract : 겹치는 부분을 제외하여 새로운 Set을 만듭니다.
+- intersect : 두 Set의 겹치는 부분으로 새로운 Set을 만듭니다.
+- exclusiveOr : 두 Set의 겹치는 부분을 제외한 나머지 부븐으로 새로운 Set을 만듭니다.
 
+
+<br>
+
+## Set의 맴버십과 동등 비교
+
+Set의 동등비교와 맴버 여부를 확인하기 위해 각각 `==`연산자와 `isSuperset(of:)`, `isStrictSubset(of:)`, isStrictSuperset(of:)`, `isDisjoint(with:)` 메소드를 사용합니다.
+
+![img3](../img/Set메소드.png)
+
+<br>
+
+`isDisjoint(with:)`는 둘간의 공통값이 없는 경우에 `true`를 반환합니다.
+
+```swift
+let houseAnimals: Set = ["🐶", "🐱"]
+let farmAnimals: Set = ["🐮", "🐔", "🐑", "🐶", "🐱"]
+let cityAnimals: Set = ["🐦", "🐭"]
+
+houseAnimals.isSubset(of: farmAnimals)
+// 참
+farmAnimals.isSuperset(of: houseAnimals)
+// 참
+farmAnimals.isDisjoint(with: cityAnimals)
+// 참
+```
+
+- isSubsetOf: Set의 모든 값이 특정 Set에 포함되는지를 확인.
+- isSupersetOf: Set의 모든 값이 특정 Set에 포함 하는지 확인
+- isDisjointWith: 두 Set이 일치하지 않는지 확인
+
+<br>
+
+# 사전(Dictionaries)
+---
+> 주의
+> Swift의 `Dictionary`타입은 `Foundation` 클래스의 `NSDictionary`를 bridge한 타입니다.
+
+## 축약형 Dictionary
+
+[key: value] 형태로 Dictionary를 선언해 사용할 수 있습니다.
+
+
+## 빈 Dictionary의 생성
+
+```swift
+
+var namesOfIntegers = [Int: string]()
+
+namesOfIntegers[16] = "sixteen"
+namesOfIntegers = [:]
+```
+
+## 리터럴을 이용한 Dictionary의 생성
+
+`[key 1: value 1, key 2: value2 , key 3: value3]` 형태로 사전을 선언할 수 있습니다.
+
+```swift
+var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin" ]
+```
+
+## Dictionary의 접근과 변경
+
+```swift
+print("The airports dictionary contains \(airports.count) items.")
+```
+
+빈 Dictionary 확인
+```swift
+if airports.isEmpty{
+    print("The airports dictionary is empty.")
+}else {
+    print("The airports dictionary is not empty.")
+}
+```
+
+값 할당
+
+```swift
+airports["LHR"] = "London"
+```
