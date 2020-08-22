@@ -223,3 +223,79 @@ if temperatureInFahrenheit <= 32 {
 
 `Switch` 문의 기본 형태는 다음과 같습니다.
 
+```swift
+switch some value to consider{
+    case value 1:
+        respond to value 1
+    case value 2, value 3:
+        respond to value 2 or 3
+    default:
+        otherwise, do something else
+}
+```
+
+
+문자를 비교해 처리하는 경우 아래와 같이 사용할 수 있습니다.
+
+```swift
+
+let someCharacter: Character = "z"
+switch someCharacter {
+    case "a":
+        print("The first letter of the alphabet")
+    case "z":
+        print("The last letter of the alphabet")
+    default:
+        print("Some other character")
+}
+//Prints `The last letter of the alphabet'
+```
+## 암시적인 진행을 사용 하지 않음 (No Implicit Fallthrough)
+
+C와 Objective-c의 `switch` 구문과는 달리 Swift의 `switch` 구문은 암시적인 진행을 하지 않습니다. C나 Objective-c에서는 `switch` 구문이 기본적으로 모든 `case`를 순회하여 `default`를 만날 때까지 진행됩니다. 그래서 그것을 진행하지 않기 위해 `break` 라는 문구를 명시적으로 적어야 했습니다. Swift에서는 `break` 를 적지 않아도 특정 `case`가 완료 되면 자동으로 `switch` 구문을 빠져 나오게 됩니다. 이런 사용 법으로 인해 실수로 `break`를 적지 않아 의도하지 않은 `case`문이 실행 되는 것을 방지 해줍니다.
+
+
+> 주의
+> `break`가 Swift에서 필수적이지 않지만 `case`안에 특정 지점에서 멈추도록 하기 위해 `break` 사용.
+
+<br>
+
+`case` 안 에 최소 하나의 실행 구문이 반드시 있어야 합니다.
+
+```swift
+let anotherCharacter: Character = "a"
+
+switch anotherCharacter{
+    case "a":
+    case "A":
+        print("the letter A")
+    default:
+        print("Not the letter A")
+}
+//컴파일 에러 발생!
+```
+
+case 안에 콤마(,)로 구분해서 복수의 case 조건을 혼합(compound)해 사용할 수 있습니다.
+
+```swift
+let anotherCharacter: CCharacter = "a"
+
+switch anotherCharacter{
+    case "a","A":
+        print("The letter A")
+    default:
+        print("Not the letter A")
+}
+//prints the letter A
+```
+
+가독성 떄문에 혼합해 사용하는 경우를 여러 코드라인에 나눠서 적을 수 있습니다. 더 많은 정보는 혼합 케이스(Compound  Cases)에서 확인할 수 있습니다.
+
+> 주의
+> 명시적으로 `switch-case` 문의 특정 지점의 끝까지 실행하고 싶다면 `fallthrough` 키워드를 사용할 수 있습니다.
+
+
+## 인터벌 매칭(Interval Matching)
+
+숫자의 특정 범위를 조건으로 사용할 수 있습니다.
+
