@@ -1,7 +1,6 @@
-
 ---
 layout: post
-title: Swift 제어문(Control Flow)
+title: Swift 함수[Function]
 tags: [Swift]
 comments: true
 ---
@@ -12,9 +11,11 @@ comments: true
 
 ### 개요
 <br>
-> 함수(Functions)
+> Swift 함수의 초보자 관점의 개념.
 
 ---
+
+
 ## 정의와 호출(Defining and Calling Functions)
 
 함수를 선언할 떄는 가장 앞에 `func`키워드를 붙이고 `(person: String)` 파라미터와 형 그리고 `->String` 형태로 반환형을 정의합니다.
