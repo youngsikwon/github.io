@@ -1,19 +1,12 @@
 ---
 layout: post
-title: Swift 함수[Function]
+title: Swift 함수(Function)
 tags: [Swift]
 comments: true
 ---
 
 # Swift를 배우고자 하는 초심자를 위한 가이드북입니다.
 
----
-
-### 개요
-<br>
-> Swift 함수의 초보자 관점의 개념.
-
----
 
 
 ## 정의와 호출(Defining and Calling Functions)
