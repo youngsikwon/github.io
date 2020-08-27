@@ -6,7 +6,7 @@ comments: true
 ---
 
 # Swift를 배우고자 하는 초심자를 위한 가이드북입니다.
-
+---
 
 
 ## 정의와 호출(Defining and Calling Functions)
