@@ -13,4 +13,5 @@
     - [Swift - 컬렉션 타입](https://youngsikwon.github.io/2020-08-21-Swift_Collection_Types/)
     - [Swift - 제어문](https://youngsikwon.github.io/2020-08-22-Swift_Control_Flow/)
     - [Swift - 클로저 개념과 이해](https://youngsikwon.github.io/2020-08-27-Swift_Closures/)
+    - [Swift - 열거형] (https://youngsikwon.github.io/2020-08-29-Swift_Enumerations/)
   - React-navite 튜토리얼
