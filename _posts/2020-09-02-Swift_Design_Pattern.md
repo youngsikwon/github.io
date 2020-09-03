@@ -5,7 +5,7 @@ tags: [Swift]
 comments: true
 ---
 
-# Swift MVC
+# Swift Design pattern
 
 ---
 
@@ -144,7 +144,7 @@ class Printer {
 
 ```swift
 Printer.shared.printDoc("Print Document")
-//클라어
+//클라이언트
 ```
 
 
