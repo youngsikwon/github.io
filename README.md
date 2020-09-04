@@ -15,7 +15,9 @@
     - [Swift - 클로저 개념과 이해](https://youngsikwon.github.io/2020-08-27-Swift_Closures/)
     - [Swift - 열거형](https://youngsikwon.github.io/2020-08-29-Swift_Enumerations/)
     
-  - Swift Design Pattern
-   - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
-   - [SingleTon Pattern](https://youngsikwon.github.io/2020-09-02-Swift_Design_Pattern/)
-  - React-navite 튜토리얼
+ - Swift Design Pattern
+  - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
+  - [SingleTon Pattern](https://youngsikwon.github.io/2020-09-02-Swift_Design_Pattern/)
+
+
+  - React-navite 튜토리얼 미정.
