@@ -18,6 +18,10 @@
   ## Swift Design Pattern
    - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
    - [SingleTon Pattern](https://youngsikwon.github.io/2020-09-02-Swift_Design_Pattern/)
+   
+  ## Swift 기타 
+  
+   - [iOS개발자가 꼭 봐야 하는 사이트 Top 5](https://youngsikwon.github.io/2020-09-04-Swift_iOS_Developer_recommendation/)
 
 
-  - React-navite 튜토리얼 미정.
+ 
