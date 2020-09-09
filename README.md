@@ -14,7 +14,7 @@
     - [Swift - 제어문](https://youngsikwon.github.io/2020-08-22-Swift_Control_Flow/)
     - [Swift - 클로저 개념과 이해](https://youngsikwon.github.io/2020-08-27-Swift_Closures/)
     - [Swift - 열거형](https://youngsikwon.github.io/2020-08-29-Swift_Enumerations/)
-    - [Swift - 열거형](https://youngsikwon.github.io/2020-09-09-Swift_Properties/)
+    - [Swift - 프로퍼티](https://youngsikwon.github.io/2020-09-09-Swift_Properties/)
     
   ## Swift Design Pattern
    - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
