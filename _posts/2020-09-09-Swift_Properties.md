@@ -168,3 +168,163 @@ let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
 print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)")
 // "the volume of fourByFiveByTwo is 40.0" 출력
 ```
+---
+
+## 프로퍼티 옵저버(Property Observers)
+
+프로퍼티에는 새 값이 설정(set) 뛸 때마다 이 이벤트를 감지할 수 있는 옵저버를 제공합니다. 이 옵저버를 프로퍼티 옵저버라 하는데 프로퍼티 옵저버는 새 값이 이전 값과 같더라도 항상 호출 됩니다. 이 프로퍼티 옵저버는 지연 저장 프로퍼티`(lazy stored Properties)`에서는 사용할 수 없습니다. 서브클래스의 프로퍼티에 옵저버를 정의하는 것도 가능합니다.
+계산된 프로퍼티는 `setter`에서 값의 변화를 감지할 수 있기 때문에 따로 옵저버를 정의할 필요가 없습니다. 프로퍼티에서는 다음 두 가지 옵저버를 제공합니다.
+
+
+ - willSet : 값이 저장 되기 바로 직전에 호출 됨
+    - 새 값의 파라미터명을 지정할 수 있는데, 지정 하지 않으면 기본 값으로 `newValue`를 사용
+ - didSet : 새 값이 저장되고 난 직후에 호출 됨
+    바뀌기 전의 값의 파라미터명을 지정할 수 있는데, 지정 하지 않으면 기본 값으로 `oldValue`를 사용
+
+
+> NOTE
+> 서브클래스에서 특정 프로퍼티의 값을 설정 했을 때, 수퍼클래스의 초기자가 호출 된 후 `willSet`, `didSet`프로퍼티 옵저가 실행됩니다. 수퍼클래스에서 프로퍼티를 변경하는 것도 마찬가지로 수퍼클래스의 초기자가 호출된 후 옵저버가 실행됩니다.
+
+```swift
+class StepCounter {
+    var totalSteps: Int = 0 {
+        willSet(newTotalSteps) {
+            print("About to set totalSteps to \(newTotalSteps)")
+        }
+        didSet {
+            if totalSteps > oldValue  {
+                print("Added \(totalSteps - oldValue) steps")
+            }
+        }
+    }
+}
+let stepCounter = StepCounter()
+stepCounter.totalSteps = 200
+// About to set totalSteps to 200
+// Added 200 steps
+stepCounter.totalSteps = 360
+// About to set totalSteps to 360
+// Added 160 steps
+stepCounter.totalSteps = 896
+// About to set totalSteps to 896
+// Added 536 steps
+```
+프로퍼티 옵저버 `willSet`과 에서는 새로운 값의 파라미터명 `newTotalSteps`를 지정해서 사용했고, `didSet`에서는 변하기 전의 값을 의미하는 파라미터명을 지정하지 않고 `oldValue`라는 기본 파라미터명을 이용한 것을 할 수 있습니다. 실행 결과 로그를 보시면 값이 변하기 전과 변하고 나서 호출된 로그를 보며 프로퍼티 값 설정시 `willSet`과 `didSet`이 호출되는 순서를 확인할 수 있다.
+
+>NOTE
+> 만약 in-out파라미터로 선언된 인자에 프로퍼티를 남기면 `willSet`과 `didSet`이 항상 실행됩니다. 이유는 in-out 파라미터이기 때문에 프로퍼티가 항상 복사되기 때문이다. 이 in-out 파라미터의 프로퍼티는 항상 원래 값에 새 값을 다시 덮어쓰게 됩니다.
+
+
+---
+
+# 전역변수와 지역변수(Global and Local Variables)
+
+앞서 소개한 계산된 프로퍼티와 프로퍼티 옵저버 기능은 전역변수와 지역변수 모두에서 이용 가능합니다. 전역 변수란 함수, 메소드, 클로저 혹은 타입 컨텍스트 밖에 정의된 변수이고 지역 변수는 그 안에 선언된 변수를 말한다.
+
+> NOTE
+> 전역 상수와 변수는 지연 저장 프로퍼티와 같이 지연 계산됩니다. 하지만 지연프로퍼티와 다르게 `lazy`키워드를 붙일 필요가 없다.
+
+
+---
+
+# 타입 프로퍼티(Type Properties)
+
+인스턴스 프로퍼티는 특정 인스턴스에 속한 프로퍼티를 말합니다. 이 프로퍼티는 새로운 인스턴스가 생성될 때마다 새로운 프로퍼티도 같이 생성됩니다. 타입 프로퍼티는 특정 타입에 속한 프로퍼티로 그 타입에 해당하는 단 하나의 프로퍼티만 생성됩니다. 이 타입 프로퍼티는 특정 타입의 모든 인스턴스에 공통으로 사용되는 값을 정의할때 유용합니다.
+
+> NOTE
+> 인스턴스 프로퍼티와는 다르게 타입 프로퍼티는 항상 초기화 값을 지정해서 사용해야 합니다. 왜냐하면 타입 자체에는 초기자(Initializer)가 없어 초기화 할 곳이 없기 때문이다.
+
+---
+
+# 타입 프로퍼티 구문
+
+타입 프로퍼티를 선언을 위해서는 `static` 키워드를 사용합니다. 클래스에서는 `static`과 `class` 이렇게 2가지 형태로 타입 프로퍼티를 선언할 수 있는데 두 가지 경우의 차이는 서브클래스에서 `overriding`가능 여부입니다. `class`로 선언된 프로퍼티는 서브클래스에서 오버라이드 가능합니다. 구조체, 열거형, 클래스에서의 타입 프로퍼티 선언의 (예)는 다음과 같습니다.
+
+```swift
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+}
+```
+
+## 타입 프로퍼티의 접근과 설정 (Querying and Setting Type Properties)
+
+인스턴스 프로퍼티와 마찬가지로 타입 프로퍼티도 점연산자(dot operator)로 프로퍼티의 값을 가져오고 할당할 수 있습니다. 관련 (예)는 다음과 같습니다.
+
+```swift
+print(SomeStructure.storedTypeProperty)
+// Prints "Some value."
+SomeStructure.storedTypeProperty = "Another value."
+print(SomeStructure.storedTypeProperty)
+// Prints "Another value."
+print(SomeEnumeration.computedTypeProperty)
+// Prints "6"
+print(SomeClass.computedTypeProperty)
+// Prints "27"
+```
+
+![img2](../img/Properties_2.png)
+ 
+ 다음 예제는 오디오 채널의 볼륨을 조절하고 관리하는 구조체입니다.
+
+ ```swift
+struct AudioChannel {
+    static let thresholdLevel = 10
+    static var maxInputLevelForAllChannels = 0
+    var currentLevel: Int = 0 {
+        didSet {
+            if currentLevel > AudioChannel.thresholdLevel {
+                // cap the new audio level to the threshold level
+                currentLevel = AudioChannel.thresholdLevel
+            }
+            if currentLevel > AudioChannel.maxInputLevelForAllChannels {
+                // store this as the new overall maximum input level
+                AudioChannel.maxInputLevelForAllChannels = currentLevel
+            }
+        }
+    }
+}
+ ```
+ 현재 오디오의 최대 볼륨의 크기는 타입 프로퍼티 `maxInputLevelForAllChannels`로 관리하고 그 값은 `thresholdLevel`로 상수로 정의돼 있어서 현재 정도`(currentLevel)`을 설정할 때마다 `(didSet)` 채널별 볼륨이 최대 그 값을 넘지 못하도록 조정합니다.
+
+
+이렇게 만든 오디오 채널 구조체를 이용해 좌우 두개의 오디오 채널을 생성할 수 있습니다.
+ ```swift
+var leftChannel = AudioChannel()
+var rightChannel = AudioChannel()
+ ```
+ 왼쪽 채널에 7 값을 할당 합니다.
+ ```swift
+leftChannel.currentLevel = 7
+print(leftChannel.currentLevel)
+// Prints "7"
+print(AudioChannel.maxInputLevelForAllChannels)
+// Prints "7"
+ ```
+ 오른쪽 채널에서 최대 값으로 설정한 값을 넘는 11을 할당해 보겠습니다.
+ ```swift
+rightChannel.currentLevel = 11
+print(rightChannel.currentLevel)
+// Prints "10"
+print(AudioChannel.maxInputLevelForAllChannels)
+// Prints "10"
+ ```
+
+`threshold`가 적용돼서 11을 입력했지만 10으로 설정된 것을 확인할 수 있습니다.
