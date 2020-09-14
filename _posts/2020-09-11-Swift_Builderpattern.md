@@ -10,10 +10,12 @@ comments: true
 
 ---
 
-UIKit을 사용해 iOS개발을 진행 하다보면 빠른 개발 속도를 위해 Storyboard를 사용 하지 않고 SwiftUI 코드만으로 UI 구성하게 되는 경우가 있다.
+&nbsp;UIKit을 사용해 iOS개발을 진행 하다보면 빠른 개발 속도를 위해 Storyboard를 사용 하지 않고 SwiftUI 코드만으로 UI 구성하게 되는 경우가 있다.
 <br>
 UI를 코드로 반복해서 구현 하다 보면, UI Component 마다 자주 호출되는 Property가 따로 있다는 것을 알게 된다.<br> 
-예를 들어 UILabel을 구현할 떈 경험상 text, font, textColor, TextAlignment 순으로 자주 호출 한다. UILabel 객체를 Builder 패턴을 사용해 생성하는 예제를 통해 자주 사용되는 Property를 어떻게 간단히 초기화 할 수 있는지 알아보자.
+예를 들어 UILabel을 구현할 떈 경험상 text, font, textColor, TextAlignment 순으로 자주 호출 한다.
+<br>
+UILabel 객체를 Builder 패턴을 사용해 생성하는 예제를 통해 자주 사용되는 Property를 어떻게 간단히 초기화 할 수 있는지 알아보자.
 
 ---
 ```swift
@@ -79,11 +81,10 @@ class UILabelBuilder: BuilderType{
 }
 ```
 
-UILabel의 extension에 typealias를 사용해  UILabelBuilder가 UILabel의 내부 클래스 Builder인 것 처럼 사용할 수 있게 해주었습니다.<br>
+&nbsp;UILabel의 extension에 typealias를 사용해  UILabelBuilder가 UILabel의 내부 클래스 Builder인 것 처럼 사용할 수 있게 해주었습니다.<br>
 UILabelBuilder의 Property들은 builder() 메서드 호출 시에 UILabel를 만들고 초기화하는데 사용 된다. 각각의 Property는 widthProperty() 메소드를 사용해 값을 넣어줄 수 있다. <br>
 이 때 set이 아니라 width를 사용한 이유는 값을 변경한 이후 자기 자신을 반환해 메소드 체이닝이 가능하다는 것을 명시적으로 표현해주기 위함이다. 일반적으로 setter는 값을 반환 하지 않기 때문이다.
 <br>
----
 ex) 흰색 글씨, 시스템 폰트에 크기가 14, 가운데 정렬된 Hello world를 표시하는 UILabel를 Builder 패턴을 사용 하지 않은 방법과 Builder 패턴을 적용한 방법으로 각각 살펴 보기.
 
 ```swift
