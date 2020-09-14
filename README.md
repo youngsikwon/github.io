@@ -19,6 +19,7 @@
   ## Swift Design Pattern
    - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
    - [SingleTon Pattern](https://youngsikwon.github.io/2020-09-02-Swift_Design_Pattern/)
+   - [Builder Pattern](https://youngsikwon.github.io/2020-09-11-Swift_Builderpattern/)
    
   ## Swift 기타 
   
