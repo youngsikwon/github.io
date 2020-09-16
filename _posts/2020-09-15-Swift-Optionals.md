@@ -50,6 +50,155 @@ print(myName)
 스위프트 프로그래밍 하면서 매개변수가 옵셔널일 때 `TIP` "아, 이 매개변수에는 값이 없어도 되는구나" 라는 것을 API 문서를 보지 않고도 알아야 합니다. <br>
 이렇게 물음표 하나만으로 훌륭하고 암묵적인 어플리케이션을 만들 수 있습니다. 
 
+---
+
+> 원시값을 통한 열거형 초기화
+
+```swift
+let primary = School(rawValue: "유치원") //  primary
+let graduate = School(rawValue: "석박사") //nil
+
+let one = Numbers(rawValue: 1) //ONE
+let three = Numbers(rawValue: 3)// nil
+```
+
+> 옵션러 열거형의 정의
+```swift
+public enum Optional<Wrapped> : ExpressibleByNilLiteral{
+    case none
+    case some(Wrapped)
+    public init(_ some: Wrapped)
+    /// 중략...
+}
+```
+
+여기서 알아야할 것은 옵셔널이 값을 갖는 케이스와 그렇지 못한 케이스 두 가지로 정의되어 있다는 것입니다. <br>즉, nil일 때는 none 케이스가 될 것이고, 값이 있는 경우는 some 케이스가 되는데 연관 값 값으로 Wrapped가 있습니다. 따라서 옵셔널에 값이 있으면 some의 연관 된 Wrapped에 값이 할당됩니다.
+즉, 값이 옵셔널ㅇ이라는 열거형의 방패막에 보호되어 래핑되어 있는 모습이라는 것입니다.
+
+<br>
+옵셔널 자체가 열거형이기 때문에 옵셔널 변수는 `switch` 구문을 통해 값이 있고 없음을 확인 할 수 있다.
+
+```swift
+func checkOptionalValue(Value optionalValue: Any?){
+  switch optionalValue{
+    case .none:
+     print("This Optional variable is nil")
+    case .some(let value):
+      print("Value is \(value)")
+  }
+}
+
+
+var myName: String? = "youngsik"
+checkOptionalValue(value: myName) // 
+
+myName = nil
+checkOptionalValue(value: myName)
+```
+
+여러 케이스의 조건틍 통해 검사하고자 한다면 더욱 유용하게 쓰일 수 있습니다.
+그럴 땐 세련되게 where 절과 병합해서 쓰면 더욱 더 좋습니다.
+
+```swift
+let numbers: [Int?] = [2, nil, -4, nil, 100]
+
+for number in numbers {
+  switch number{
+    case .some(let value) where value < 0:
+      print("Negative value!! \(value)")
+    case .some(let value) where value > 10:
+      print("Large value!! \(value)")
+    
+
+    case .some(let value):
+      print("Value \(value)")
+
+    case .none:
+      print("nil")
+  }
+}
+```
+
+> 이 방법보다 더 유용한 방법이 있는데 제 생각으론 너무 위험한 방법인 것 같습니다. `런타임 오류 가능성이 높다`
+
+ - 강제 추출
+
+ ```swift
+var myName: String? = "youngsik"
+
+// 옵셔널이 아닌 변수에는 옵션러 값이 들어갈수 있어! 추출해서 할당 해줄거다.
+var youngsik: String = myName!
+
+myName = nil
+//youngsik = myName! //런타임 오류
+
+// if 구 등 조건문을 이용해 조금 더 안전한 방법.
+
+if myName != nil{
+  print("my name is \(myName)")
+
+} else{
+  print("myName == nil")
+}
+ ```
+ > 런타임 오류의 가능성을 항상 내포 하기 때문에 옵션러 강제 추출 방식은 사용하는 것을 지양해야 합니다.
+
+
+---
+
+스위프트는 조금 더 안잔하고 세련된 방법으로 옵셔널 바인딩을 제공합니다. <br>
+옵서녈 바인딩은 옵셔널에 값이 있는지 확인할 때 사용합니다.
+```swift
+var myName: String? = "youngsik"
+
+if let name = myName{
+        print("My Name is \(name)")
+
+} else{
+    print(" myName == nil")
+}
+// My Name is youngsik
+
+//옵셔널 바인딩을 통한 임시 변수 할당
+if var name = myName{
+    name = "wiz" // 변수이므로 내부에서 변경이 가능ㅎ
+    print("My Name is \(name)")
+} else {
+    print("myName == nil")
+}
+
+// My Name is wiz
+```
+---
+
+
+> 암시적 추출 옵셔널
+
+때대로 nil을 할당하고 싶지만, 옵셔널 바인딩으로 매번 값을 추출하기 귀찮거나 로직상 nil 때문에 런타임 오류가 발생하지 않을 것 같다는 확신이 들 때 nil을 할당 해줄 수 있는 옵셔널이 아닌 변수나 상수가 있으면 좋을 겁니다. 이 때 사용하는 것이 바로 `암시적 추출 옵셔널`입니다.
+
+<br>
+옵셔널을 표시하고자 타입 뒤에 `물음표(?)`를 사용 했지만, 암시적 추출 옵셔널을 사용하려면 타입 뒤에 `느낌표(!)`를 사용해 주면 됩니다.
+
+```swift
+var myName: String! = "yuongsik"
+print(myName)
+myName = nil
+
+//암시적 추출 옵셔널도 옵셔널이므로 당연히 바인딩을 사용할 수 있습니다.
+
+if let name = myName{
+  print("my Name is \(name)")
+} else{
+  print("myName == nil")
+}
+// myname == nil
+
+myName.isEmpty // 오류
+
+```
+
+
+
 
 
 
