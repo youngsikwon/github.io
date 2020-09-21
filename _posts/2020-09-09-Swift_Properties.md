@@ -83,6 +83,168 @@ print(manager.importer.filrname)
 >NOTE
 > 만약 지연 프로퍼티가 여러 스레드에서 사용되면 지연 프로퍼티가 한번만 실행되는 걸 보장 하지 않습니다. 만약 지연 프로퍼티가 단일 스레드에서 사용되면 초기화는 한번만 하게 됩니다.
 
+
+> 예시
+
+- 지연 저장 프로퍼티
+
+```swift
+struct CoordinatePoint{
+  var x: Int = 0
+  var y: Int = 0
+}
+
+class position{
+  lazy var point: CoordinatePoint  = CoordinatePoint()
+  let name: String
+
+  init(name: String){
+    self.name = name
+  }
+}
+
+let youngsikPosition: position = position(name: "youngsik")
+
+// 이 코드 통해 point 프로퍼티를 처음 접근 할 때
+// point 프로퍼티의 CoordinatePoint 생성됨
+print(youngsikPosition.point)
+```
+
+> NOTE 다중스레드와 지연 저장 프로퍼티
+> 다중 스레드 환경에서 지연 저장 프로퍼티에 동시 다발적으로 접근할 때는 한 번만 초기화된다는 보장이 없습니다. 
+> 생성되지 않은 지졍 저장 프로퍼티에 많은 스레드가 비슷한 시점에 접근한다면, 여러 번 초기화 될 수 있습니다.
+
+
+## 연산프로퍼티
+
+- 연산 프로퍼티는 실제 값을 저장하는 프로퍼티가 아니라, 특정 상태에 따른 값을 연산하는 프로퍼티입니다. 내/외부의 값을 연산하여 적절한 값을 돌려주는 접근자의 역할이나 은닉화된 내부의 프로퍼티 값을 간접적으로 설정하는 설정자의 역할함.
+
+> 연산 프로퍼티 ex)
+
+```swift
+struct CoordinatePoint{
+    var x: Int
+    var y: Int
+
+func oppositePoint() -> CoordinatePoint {
+    return CoordinatePoint(x: x-, y: -y)
+} 
+
+
+mutating func setOppsitePoint(_ oppsite: CoordinatePoint){
+    x = -oppsite.x
+    y = -oppsite.y
+}
+}
+
+
+
+var youngsikPoint = CoordinatePoint = CoordinatePoint(x: 10, y: 20)
+
+
+//현재 좌표
+print(youngsikPoint)
+//CoordinatePoint(x: 10, y: 20)
+
+// 대칭 좌표
+print(youngsik.setOppsitePoint())
+//CoordinatePoint(x: -10, y: -20)
+
+
+youngsikPoint.setOppsitePoint(CoordinatePoint(x: 15, y: 20))
+
+
+print(youngsikPoint)
+//CoordinatePoint(x: -15, y: -20)
+```
+
+> 이런식으로 연산 프로퍼티를 사용하면  하나의 프로퍼티에 접근자와 설정자가 모두 모여있고, 해당 프로퍼티가 어떤 역할을 하는지 좀 더 명확하게 표현 가능하다.
+
+
+---
+
+## 프로퍼티 감시자(Property Observers)
+
+- 프로퍼티의 값이 변경됨에 따라 적절한 작업을 취할 수 있으며, 새로 값을 할당 받을 때마다 호출합니다. 이때 변경되는 값이 현재의 값과 같더라도 호출 합니다.
+
+- 프로퍼티 감시자는 지연 저장 프로퍼티에는 사용할 수 없으며, 오로지 일반 프로퍼티에만 사용가능 또한,  프로퍼티 재정의해 상속받은 저장 프로퍼티 또는 연산 프로퍼티에도 사용이 가능합니다.
+
+
+```swift
+class Account{
+    var credit: Int = 0 {
+        willSet{
+            print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정입니다." )
+        }
+
+        didSet{
+            print("잔액이 \(oldValue)에서 \(credit)원으로 변경되었습니다.")
+        }
+    }
+}
+
+let myAccount: Account = Account()
+//잔액이 0원에서 1000원으로 변경될 예정입니다.
+
+myAccount.credit = 1000
+//잔액이 0에서 1000원으로 변경되었습니다.
+
+```
+
+> 상속 받은 연산 프로퍼티의 프로퍼티 감시자 구현
+
+```swift
+class Account{
+    var credit: Int = 0 {
+        willSet{
+            print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정입니다." )
+        }
+
+        didSet{
+            print("잔액이 \(oldValue)에서 \(credit)원으로 변경되었습니다.")
+        }
+    }
+
+    var dollarValue: Double {
+      get{
+        return Double(credit) // 1000.0
+      }
+      set{
+        credit = Int(newValue * 1000)
+          print("잔액을 \(newValue)달러로 변경중입니다.")
+      }
+    }
+}
+
+class ForeignAccount: Account{
+  
+  override var dollarValue: Double{
+    willSet{
+      print("잔액이 \(dollarValue)달러에서 \(newValue)달러로 변경될 예정입니다.")
+    }
+
+    didSet{
+      print("잔액이 \(oldValue)달러에서 \(oldValue)달러로 변경 되었습니다.")
+    }
+  }
+}
+
+let myAccount: ForeignAccount = ForeignAccount()
+// 잔액이 0원에서 1000으로 변경.
+myAccount.credit = 1000
+// 잔액이 0에서 1000으로 체결 완료.
+
+
+//잔액이 1.0다러에서 2.0 달러로 변경될 예정
+//1000 -> 2000으로 변경 예정
+// 완료
+
+myAccount.dollarValue = 2
+
+```
+
+---
+
 ## 저장 프로퍼티와 인스턴스 변수(Stored Properties and Instance Variables)
 
 Objective-C에 경험이 있으신 분은 objective-C언에서는 값을 저장하기 위해 점 연산자(`instance.property = value`)나 set 연산(`instance.setProperty(value))`으로 값을 저장한다는 것을 아실 겁니다. 뿐만 아니라 메모리 관리와 관련한 개념도 프로퍼티에 함께 명시합니다. 바로 이런식으로 말이죠 `@Property(nonatomic, retain) NSString *propertyName;` Swift에서는 이런 컨셉을 하나의 프로퍼티에 녹여 프로퍼티의 선언과 사용의 혼란을 피했습니다. 프로퍼티의 이름, 타입, 메모리 관리 등으 모든 정보를 프로퍼티를 선언하는 한 곳에서 정의하게 됩니다.
@@ -123,10 +285,102 @@ print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
 // "square.origin is now at (10.0, 10.0)" 출력
 ```
 
+
+
+
 위 코드는 좌표와 크기를 갖는 사각형을 표현하는 구조체에 관한 코드입니다. 여기서 `Rect` 구조체는 사각형의 중점을 표현하는 `center`라는 계산된 프로퍼티를 제공합니다. 이 프로퍼티는 계산된 프로퍼티의 정의대로 값을 직접 갖고 있는 것이 아니라 다른 좌표와 크기 프로퍼티들을 적절히 연산해서 구할 수 있습니다.(`get`)또는 `set`으로 사각형의 중점을 직접 설정할 수 있는데, 이 값을 설정할 때 `x,y` 좌표가 어떤 값을 가져야 하는지 계산해서 `x,y`에 적절한 좌표값을 넣어 줍니다.
 
 ![img1](../img/Properties_1.png)
 
+---
+
+> 저장 프로퍼티 몇가지 ex)
+
+## 1. 저장 프로퍼티의 선언 및 인스턴스 생성
+
+```swift
+struct CoordinatePoint{
+  var x: Int // 저장 프로퍼티
+  var y: Int  // 저장 프로퍼티
+}
+// 구조체에는 기본적으로 저장 프로퍼티를 매개변수로 갖는 이니셜라이저가 있습니다.
+let youngsikPoint: CoordinatePoint = CoordinatePoint(x: 10, y: 5)
+
+class position{
+  var point: CoordinatePoint
+  // 저장 프로퍼티(변수) - 위치(point)는 변경될 수 있음을 뜻함.
+  let name: String // 저장프로퍼티(상수)
+
+  //프로퍼티 기본값을 지정해주지 않는다면 이니셜라이저를 따로 정의
+  init(name: String, currentPoint: CoordinatePoint) {
+    self.name = name
+    self.point = currentPoint
+  }
+}
+// 사용자 정의 이니셜라이저만 호출해야만 합니다.
+// 그렇지 않으면 프로퍼티 초깃값을 할당 할 수 없기 때문에 인스턴스 생성이 불가능
+let youngsikPosion: position = position(name: "youngsik", currentPoint: youngsikPoint)
+
+```
+
+## 2. 저장 프로퍼티의 초깃값 생성
+
+```swift
+//좌표
+
+struct CoordinatePoint{
+  var x: Int = 0 // 저장프로퍼티
+  var y: Int = 0 // 저장 프로퍼티
+}
+
+//프로퍼티의 초기값 할당했으면 굳이 전달인자로 초기값을 넘길 필요가 없다.
+let youngsikPoint: CoordinatePoint = CoordinatePoint()
+
+//물론 기존에 초깃값을 할당할 수 있는 이니셜라이저도 있습니다.
+let wizplanPoint: CoordinatePoint = CoordinatePoint(x: 15, y: 20)
+
+print("youngsik's point \(wizplanPoint.x), \(wizplanPoint.y))")
+
+class Position{
+  var point: CoordinatePoint = CoordinatePoint()
+  var name: String= "unknown"
+}
+
+let youngsikPosition: Position = Position()
+
+Position.point = youngsikPoint
+Position.name = "youngsik"
+```
+
+- 옵셔널 저장 프로퍼티
+
+```swift
+//좌표
+struct CoordinatePoint{
+  // 위치는 x, y 값이 모두 있어야 하므로 옵셔널이면 안 됩니다.
+  var x: Int
+  var y: Int
+}
+
+// 사람의 위치 정보
+class Position{
+
+  //현재의 사람의 위치를 모를 수도 있다. - 옵셔널
+  var point: CoordinatePoint?
+  let name: String
+
+  init(name: String){
+    self.name = name
+  }
+}
+
+//이름은 필수지만 위치는 모를 수 있습니다.
+let youngsikPosition: Position = Position(name: "youngsik")
+
+//위치를 알게되면 그 때 위치 값을 할당해줍니다.
+youngsikPosition.point = CoordinatePoint(x: 20, y: 15)
+```
+> 이렇게 옵셔널과 이니셜라이저를 적절히 사용하면 다른 프로그래머가 사용할 때, 내가 처음 의도했던 대로 구조체와 클래스를 사용할 수 있도록 유도할 수 있다.
 
 ## Setter 선언의 간략한 표현(Shorthand Setter Declaration)
 
