@@ -267,9 +267,25 @@ let youngsikRoomViaOptionalUnwraping: Int = youngsik.address!.building!.room!.nu
 > 옵셔널 바인딩 사용
 
  ```swift
+var roomNumber: Int? = nil
 
+if let youngsikAddress = youngsik.address{
+  if let youngsikBuilding: Building = youngsikAddress.building{
+    if let youngsikRoom: Room = youngsikRoom.room{
+      roomNumber = youngsikRoom.number
+    }
+  }
+}
+
+if let number: Int = roomNumber{
+  print(number)
+}else{
+  print("Can not find Room Number")
+}
  ```
 
+
+> 옵셔널 체이닝 사용 <작성 예정.>
 
 
 
