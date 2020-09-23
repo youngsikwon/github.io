@@ -199,6 +199,85 @@ if let name = myName{
 myName.isEmpty // 오류
 
 ```
+---
+
+## Swift5_Book 레퍼런스 --> 옵셔널 체이닝과 빠른 종료 기입
+
+> 옵셔널 체이닝이란?
+
+ - 옵셔널에 속해 있는 nil일지도 모르는 프로퍼티, 메서드, 서브스크립션 등을 가져오거나 호출할 때 사용할 수 있는 일련의 과정이며 옵셔널 값이 있다면 프로퍼티, 메서드 서브스크립트 등을 호출 할 수 있고, 옵셔널이 nil이라면 프로퍼티, 메서드, 서브스크립트 등은 nil로 반환합니다.
+ - 옵셔널을 반복 사용하여 옵셔널이 자전거 체인처럼 서로 꼬리를 물고 있는 모양이기 때문에 옵셔널 체이닝이라고 부릅니다. 또 다른 점은 옵셔널에서 값을 강제 추출해 반환하기 때문에 반환 값이 옵셔널이 아니라는 점입니다. 하지만 정말 100% `nil`이 아니라는 확신을 하더라도 사용을 지양하는 편이 좋습니다.
+
+
+
+
+사람의 주소 정보 표현 설계
+
+ ```swift
+ 
+ class Room{ // 호실
+var number: Int //호실번호
+
+init(number: Int){
+  self.number = number
+}
+}
+
+class Building{ // 건물
+
+ var name: String // 건물 이름
+ var room: Room? // 호실 정보
+
+ init(name: String) {
+   self.name = name
+ }
+}
+struct Address { // 주소
+var province: String //광역시/도
+var city: String // 시/군/구
+var street: String // 도로명
+var building: Building? // 건물
+var detailAddress: String? // 건물 외 상세 주소
+}
+
+class Person{//사람
+var name: String // 이름
+var address: Address? //주소  
+  init(name: String){
+    self.name = name
+  }
+}
+//현재 모든 클래스 및 구조체를 설계 했습니다.
+ 
+// 인스턴스 생성
+
+let youngsik: Person = Person(name: "Youngsik")
+
+let youngsikRoomViaOptionalChaining: Int? = youngsik.address?.building?.room?.number // nil
+
+let youngsikRoomViaOptionalUnwraping: Int = youngsik.address!.building!.room!.number // 오류 발생!!
+ ```
+
+ youngsik에는 아직 명확한 정보가 없습니다. `youngsikRoomViaOptionalChaining` 상수에 호실 번호를 할당하려고 옵셔널 체이닝을 사용하면 `youngsik`의 `address` 프로퍼티가 nil이므로 옵셔널 체이닝 도중 `nil`이 반환 됩니다. <br>
+ 그러나 `youngsikRoomViaOptionalUnwraping` 상수에 호실 번호를 할당할 때는 강제 추출을 시도 했기 떄문에 `nil`인 `address` 프로퍼티에 접근하려 할 때 런타임 오류 발생합니다.
+
+ ![img1](../img/Optional.jpg)
+
+
+> 옵셔널 바인딩 사용
+
+ ```swift
+
+ ```
+
+
+
+
+
+
+
+
+ 
 
 
 

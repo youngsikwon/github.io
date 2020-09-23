@@ -300,6 +300,8 @@ print(instance.x)
 // Prints "100"
 ```
 
+
+
 ---
 
 # 자동클로저(Autoclosures)
