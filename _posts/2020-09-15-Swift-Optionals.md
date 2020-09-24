@@ -285,7 +285,18 @@ if let number: Int = roomNumber{
  ```
 
 
-> 옵셔널 체이닝 사용 <작성 예정.>
+> 옵셔널 체이닝 사용
+
+```swift
+var youngsik: Person(name: String)
+
+if let roomNumber: Int = youngsik.address?.building?.room?.number{
+  print(roomNumber)
+}else{
+  print("Can not kind Room number")
+}
+```
+
 
 
 
