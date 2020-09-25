@@ -297,6 +297,18 @@ if let roomNumber: Int = youngsik.address?.building?.room?.number{
 }
 ```
 
+여러 단계로 복잡하게 중첩된 옵션러 프로퍼티나 메서드 등에 `nil` 체크를 하지 않아도 손쉽게 접근할 수 있습니다. 또한 옵셔널 체이닝을 통해 값을 받아 오기만 하는 거이 아니라 반대로 값을 할당해줄 수도 있습니다.
+
+```swift
+
+youngsik.address?.building?.room?.number = 505
+print(youngsik.address?.building?.room?.number) // nil
+```
+
+이렇게 작성할 경우 `youngsik`의 `address` 프로퍼티가 없으며 그 하위의 `building` 프로퍼티도 `room` 프로퍼티도 없습니다. 그렇기 때문에 옵셔널 체이닝은 동작 도중에 중지 될 것입니다.
+<br> `number` 프로퍼티는 존재 조차 하지 않으므로 505가 할당 되지 않는 것은 물론이다.
+
+
 
 
 
