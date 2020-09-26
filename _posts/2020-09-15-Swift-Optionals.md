@@ -309,12 +309,232 @@ print(youngsik.address?.building?.room?.number) // nil
 <br> `number` 프로퍼티는 존재 조차 하지 않으므로 505가 할당 되지 않는 것은 물론이다.
 
 
+> 옵셔널 체이닝을 통한 값 할당
+
+```swift
+
+youngsik.address = Address(province: "서울시", city: "구로구", street: "신도림동", building: nil, detailAddress: nil)
+
+youngsik.address?.building = Building(name: "곰굴")
+youngsik.address?.building ?.room = Room(number: 0)
+youngsik.address?.building?.room?.number = 505
+
+
+print(youngsik.address?.building?.room?.number) // optional(505)
+```
+
+- 옵셔널 체인에 존재하는 프로퍼티를 실제로 할당해준 후 옵셔널 체이닝을 통해 값이 정샂걷으로 반환되는 것을 확인할 수 있습니다.
+
+> 옵셔널 체이닝을 통한 메서드 호출
+
+```swift
+struct Address{ //주소
+
+
+var province: String
+var city: String 
+var street: String
+var building: Building?
+var detailAddress: String?
+
+
+init(province: String, city: String, street: String){
+  self.province  = province
+  self.city = city
+  self.street = street
+}
+func fullAddress() -> String? {
+  var restAddress: String? = nil
+
+  if let buildingInfo: Building = self.building{
+    restAddress = buildingInfo.name
+
+  }else 
+  if let detail = self.detailAddress{
+    restAddress = detail    
+  }
+
+  if let rest: String = restAddress{
+    var fullAddress: String = self.province
+
+    fullAddress += " " + self.city
+    fullAddress += " " + self.street
+    fullAddress += " " + rest
+
+
+    return fullAddress
+  }else{
+    return nil
+  }
+}
+func printAddress() {
+  if let address: String = self.fullAddress(){
+    print(address)
+  }
+}
+}
+
+}
+
+youngsik.address?.fullAddress()?.isEmpty // false
+youngsik.address?.printAddress() // 서울시 구로구 신도림 곰굴
+
+
+```
+
+- 서브스크립트를 가장 많이 사용 하는 곳은 Array와 Dictionary입니다. 옵셔널의 서브스크립트를 사용하고자 할 때는 대괄호([]) 보다 앞에 * 물음표(?)를 표기 해주어야 합니다.
+
+
+---
+
+## 빠른 종료
+
+Early Exit의 핵심 키워드는 `guard`입니다. `guard` 구문은 `if` 구문과 유사하게 `Bool` 타입의 값으로 동작하는 기능입니다.
+<br>
+`guard` 뒤에 따라 붙는 코드의 실행 결과가 true일 때 코드가 계속 실행 됩니다. if 구문과는 다르게 `guard` 구문은 항상 `else` 구문이 뒤에 따라와야 합니다.
+<br>
+만약 `guard`뒤에 따라오는 Bool 값이 `false`라면 `else`의 블록 내부 코드를 실행하게 되는데, 이때 `else` 구문의 블록 내부에는 꼭 자신보다 상위의 코드 블록을 종료 하는 코드가 들어가게 됩니다.
+그래서 특정 조건에 부합하지 않다는 판단이 되면 재빠르게 코드 블록의 실행을 종료할 수 있습니다.
+<br>
+이렇게 현재의 코드 블록을 종료할 때는 `return, break, continue, throw`등의 제어문 전환 명령을 사용합니다.
+
+```swift
+guard Bool 타입 값 else {
+  예외사항 실행문
+  제어문 전환 명령어
+}
+
+//guard 구문을 사용하면 if 코드를 훨씬 간결하고 읽기 좋게 구성할 수 있습니다. if 구문을 사용하면 예외사항을 else 블록으로 처리해야 하지만 예외 사항만을 처리하고 싶다면 guard구문을 사용 권장.
+```
+
+
+> 같은 역할을 하는 if 구문과 guard구문
+
+
+```swift
+// if구문을 사용하는 코드
+for i in 0...3{
+  if i == 2{
+    print(i)
+  }else{
+    continue
+  }
+}
+```
+
+```swift
+// guard 구문을 사용 하는 코드
+for i in 0...3{
+  guard i == 2 else{
+    continue
+  }
+  print(i)
+}
+```
+
+> guard 구문의 옵셔널 바인딩 활용
+
+```swift
+func greet(_ person: [String: String]) {
+  guard let name: String = person["name"] 
+  else{
+    return
+  }
+
+
+  print("hello \(name)")
+
+  guard let location: String = person["location"]
+  else{
+    print("I hope the weather is nice near you")
+    return
+  }
+
+  print("I hope the weather is nice in \(location)")
+}
+
+
+var persinInfo: [String: String] = [String: String] ()
+persinInfo["name"] = "Jenny"
+
+greet(persinInfo)
+// I hope the weather is nice near you
+
+persinInfo["location"] = "Korea"
+
+greet(persinInfo)
+//I hope the weather is nice in Korea
+```
+
+`guard`를 통해 옵셔널 바인딩 된 상수는 greet(_:)함수 내에서 지역상수처럼 사용된 것을 볼 수 있습니다. <br>
+
+그러면 우리가 옵셔널 체이닝에서 작성했던 코드를 조금 더 발전시켜 보겠습니다.
+Address의 구조체의 FullAddress메서드를 조금 수정했어요
+
+
+> 메서드 내부에서 guard 구문의 옵셔널 바인딩 활용
+
+```swift
+func fullAddress() -> String? {
+  var restAddress: String? = nil
+
+
+  if let buildingInfo?: Building = self.building{
+    restAddress = buildingInfo.name
+  }else 
+  
+  if let detail = self.detailAddress{
+    restAddress = detail
+  }
 
 
 
+  guard let rest: String = restAddress else{
+    return nil
+  }
 
 
+  var fullAddress: String = self.province
+  
+  fullAddress += " " + self.city
+  fullAddress += " " + self.street
+  fullAddress += " " + rest
 
+
+return fullAddress
+}
+
+```
+
+기존에 사용했던 `if let`바인딩보다는 조금 더 깔금하게 명료하게 사용할 수 있습니다.
+조금 더 구체적인 조건을 추가하고 싶다면 쉼표(,)로 추가 조건을 나열 해주면 됩니다. 
+
+> guard 구문에 구체적인 조건을 추가
+
+```swift
+func enterclub(name: String?, age: Int?){
+  guard let name: String = name, let age: Int = age, age > 19, name.isEmpty == false else {
+    print("You are too young to enter the club")
+  }
+
+
+  print("Welcome \(name)")
+}
+```
+
+`guard`구문의 한계는 자신을 감싸는 코드 블록, 즉 `return, break, continue, throw` 등의 제어문 전환 명령어를 쓸 수 없는 상황 이라면 사용 불가능하다는 점입니다. 함수나, 메서드, 반복뭄ㄴ 등 특정 블록 내부에 위치하지 않는다면 사용이 제한됩니다.
+
+
+> guard 구문이 사용될 수 없는 경우
+
+```swift
+let first: Int = 3
+let second: Int = 5
+
+guard first > second else{
+  // 여기에 들어올 제어문 전환 명령은 딱히 없습니다. 오류
+}
+```
 
  
 
