@@ -64,6 +64,38 @@ print(strings)// ["0", "1", "2", "3", "4"]
 배열의 append 연산을 실행하기 위한 시간도 필요 없다.
 
 
+`map` 메서드를 사용하여 코드가 조금 더 간략해지지 했지만, 우리가 배웠던 클로저 표현식을 사용하여 표현을 더 간략화해볼 수 있습니다. 
+
+> 클로저 표현의 간략화
+
+```swift
+let numbers: [Int]  = [0, 1, 2, 3, 4]
+
+
+//기본 클로저 표현
+var doubleNumbers = numbers.map({ (number: Int) -> Int in return number * 2
+})
+
+//매개변수 및 반환 타입 생략
+doubleNumbers = numbers.map({return $0 * 2 })
+print(doubleNumbers) //[0, 2, 4, 6, 8]
+
+//반환 키워드 생략
+doubleNumbers = numbers.map({ $0 * 2 })
+print(doubleNumbers)//[0, 2, 4, 6, 8]
+
+// 후행 클로저 사용
+doubleNumbers = numbers.map {$0 * 2}
+print(doubleNumbers)//[0, 2, 4, 6, 8]
+
+
+
+
+```
+
+---
+
+
 
 
 
