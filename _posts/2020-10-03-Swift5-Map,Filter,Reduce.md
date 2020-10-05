@@ -88,9 +88,6 @@ print(doubleNumbers)//[0, 2, 4, 6, 8]
 doubleNumbers = numbers.map {$0 * 2}
 print(doubleNumbers)//[0, 2, 4, 6, 8]
 
-
-
-
 ```
 
 ---
