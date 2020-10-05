@@ -8,7 +8,7 @@
 
 - 2020.08 ~ Swift 앱개발하면서 문제 공유할 예정.
  - 초심자를 위한 튜토리얼.
-  ## Swift 튜토리얼
+ 
     - [Swift - 기본 연산자](https://youngsikwon.github.io/2020-08-13-Swift_Tutorial/)
     - [Swift - 문자열과 문자](https://youngsikwon.github.io/2020-08-20-Swift_Characters/)
     - [Swift - 컬렉션 타입](https://youngsikwon.github.io/2020-08-21-Swift_Collection_Types/)
