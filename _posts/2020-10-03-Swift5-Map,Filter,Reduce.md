@@ -90,6 +90,134 @@ print(doubleNumbers)//[0, 2, 4, 6, 8]
 
 ```
 
+
+
+## 리듀스
+
+ - 리듀스 기능은 `결합`이라고 불러야 마땅합니다. 컨테이너 내부의 콘텐츠를 하나로 합하는 기능을 실행하는 고차 함수입니다. 배열이라면 배열의 모든 값을 전달인자로 전달받은 클로저의 연산 결과를 합해줍니다.
+
+ - Swift의 리듀스는 두 가지 형태로 구현되어 있습니다.
+  
+  1. 클로저가 각 요소를 전달받아 연산한 후 값을 다음 클로저 실행을 위해 반환하며 컨테이너를 순환하는 형태입니다.
+
+
+
+```swift
+public func reduce<Result>(_ initialResult: Result,
+_ nextPartialResult: (Result, Element) throws -> Result) rethrows -> Result
+
+```
+- 풀이
+
+ - initialResult 매개변수로 전달되는 값을 통해 초깃값을 지정해 줄 수 있으며, nextPartialResult라는 매개변수로 클로저 값으 받습니다. nextPartialResult 클로저의 첫 번재 매개변수는 리듀스 메서드의 initialResult 매개변수를 통해 전달받은 초깃값 또는 이전 클로저의 결괏값.
+
+
+```swift
+public func reduce<Result>(into initialResult: Result,
+_ updateAccumulationgResult: (inout Result, Element) throws -> ()) rethrows -> Result
+```
+
+- 리듀스의 메서드 사용
+
+```swift
+
+
+let numbers: [Int] = [1, 2, 3]
+
+var sum: Int = numbers.reduce(0, { (result: Int, next: Int) -> Int in 
+print("\(result) + \(next)")
+
+return result + next 
+})
+
+
+print(sum) //6
+print("=====================================")
+//초깃값이 0이고 정수 배열의 모든 값을 뻅니다.
+
+var subtract: Int = numbers.reduce(0, { (result: Int, next: Int) -> Int in
+print("\(result) - \(next)")
+
+return result - next
+})
+
+print(subtract)// -6
+
+print("=====================================")
+
+// 초깃값이 3이고 정수 배열의 모든 값을 뻅니다.
+var subractFromThree: Int = numbers.reduce(3){
+  print("\($0) = \($1)")
+
+  return $0 - $1
+}
+print(subractFromThree)
+print("=====================================")
+
+
+// 문자열 배열을 reduct(_:-:) 메서드를 이용해 연결시킵니다.
+
+let names: [String] = ["Chope", "Jay", "Joker", "Nova"]
+
+let reductNames: String = names.reduce("youngsik's friend:") {
+  return $0 + "," + $1
+}
+print(reductNames)
+
+print("=====================================")
+
+// 두 번째 형태인 reduct(into:_:) 메서드의 사용
+
+// 초깃값이 0이고 정수 배열의 모든 값을 더합니다.
+//첫 번째 리듀스 형태와 달리 클로저의 값을 반환하지 않고 내부에서
+//직접 이전 값을 변경한다는 점이 다릅니다.
+sum = numbers.reduce(into: 0, { (result: inout Int, next: Int) in
+print("\(result) + \(next)")
+
+result += next
+})
+
+print(sum) //6
+
+print("=====================================")
+// 초깃값이 3이고 정수 배열의 모든 값을 뻅니다.
+// 첫 번쨰 리듀스 형태와 달리 클로저의 값을 반환하지 않고 내부에서
+//직접 이전 값을 변경한다는 점이 다릅니다.
+
+subractFromThree = numbers.reduce(into: 3, {
+  print("\($0) - \($1)")
+})
+
+print(subractFromThree) // -3
+
+
+print("=====================================")
+
+//첫 번째 리듀스 형태와 다르기 떄문에 다른 컨테이너에 값을 변겨앟여 넣어줄 수도 있습니다.
+//이렇게 하면 맵이나 필터와 유사한 형태로 사용할 수 있습니다.
+//홀수로 걸러내고 짝수만 두 배로 변경하여 초깃값만 [1, 2, 3] 배열에 직접 연산합니다.
+var doubleNames: [Int] = numbers.reduce(into: [1,2]){ (result: inout [Int], next: Int) in
+print("result: \(result) next: \(next)")
+
+guard next.is else{
+  return
+}
+
+print("\(result) append \(next)")
+
+result.append(next * 2)
+
+}
+
+print(doubleNames) // [1], [2], [3]
+
+
+//  필터와 맵을 사용한 모습
+doubleNames = [1,2] + numbers.filter { $0.isMultiple(of: 2) }.map { $0 * 2}
+print(doubleNames) // [1, 2, 4]
+
+
+```
 ---
 
 
