@@ -25,6 +25,7 @@
   ## Swift 기타 
   
    - [iOS개발자가 꼭 봐야 하는 사이트 Top 5](https://youngsikwon.github.io/2020-09-04-Swift_iOS_Developer_recommendation/)
+   - [Swift - Links For iOS Developer](https://youngsikwon.github.io/2020-10-08-Swift-Links-For-iOS-Developer/)
 
 
  
