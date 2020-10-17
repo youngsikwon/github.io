@@ -16,6 +16,8 @@
     - [Swift - 클로저 개념과 이해](https://youngsikwon.github.io/2020-08-27-Swift_Closures/)
     - [Swift - 열거형](https://youngsikwon.github.io/2020-08-29-Swift_Enumerations/)
     - [Swift - 프로퍼티](https://youngsikwon.github.io/2020-09-09-Swift_Properties/)
+    - [Swift - Subscripts](https://youngsikwon.github.io/2020-09-14-Swift-Subscript/)
+    - [Swift -  Map, Filter, Reduce](https://youngsikwon.github.io/2020-10-03-Swift5-Map,Filter,Reduce)
     
   ## Swift Design Pattern
    - [Strategy Pattern](https://youngsikwon.github.io/2020-09-03-Swift_Design_Pattern_P/)
