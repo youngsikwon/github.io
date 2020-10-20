@@ -137,6 +137,33 @@ let someValue = matrix[2, 2]
 ```
 
 
+- 서브스크립트의 구현
+
+```swift
+struct Student{
+  var name: String
+  var number: Int
+}
+
+
+
+class School{
+  
+
+  var number: Int = 0
+  var studens: [Student] = [Student]()
+
+
+  func addStudens(name: String){
+    let studens: Studens = Studens(name: name, number: self.number)
+    self.studens.append(student)
+    slef.number += 1
+  }
+
+  
+}
+```
+
 
 
 
