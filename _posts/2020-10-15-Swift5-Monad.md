@@ -1,36 +1,89 @@
 ---
 layout: post
-title: Swift5 - Monad
+title: Swift - 상속
 tags: [Swift]
 comments: true
 ---
 
+# 상속(Inheritance)
 
-모나드(Monad)는 순서가 있는 연산을 처리하는데 사용하는 디자인 패턴이다. 모나드는 순수 함수형 프로그래밍 언어에서 부작용을 관리하기 위해 광범위하게 사용되며 복합 체계 언어에서도 복잡도를 제어하기 위해 사용된다.
+---
+
+클래스는 메소드, 프로퍼티와 다른 특징(characteristics)을 다른 클래스로부터 상속할 수 있습니다. 이것이 Swift에서 클래스가 다른 타입과 구분되는 근본적인 요소입니다. 클래스에서는 저장된 프로퍼티와 계산된 프로퍼티와 상관없이 상속받은 프로퍼티에 프로퍼티 옵저버를 설정해서 값 설정해서 반응 할 수 있습니다.
 
 
 
+# 기반 클래스 정의(Defining a Base Class)
 
-## Monad 갖춰야하는 조건 다음과 같습니다.
+- 다른 어떤 클래스로부터 상속받지 않은 클래스를 기반 클래스라 합니다.
 
-- 타입을 인자로 받는 타입(특정 타입의 값을 포장)
-- 특정 타입의 값을 포잫안 것을 반환하는 함수(메서드)가 존재
-- 포장된 값을 변환하여 같은 형태로 포장하는 함수(메서드)가 존재
+> NOTE
+> Objective-C에서는 모든 클래스가 NSObject 클래스로부터 파생된 클래스로 생성되는 것과 달리 Swift에서는 SuperClass 지정 없이 클래스 선언이 가능하고 그 클래스가 SuperClass가 됩니다.
+
+
+- 기반 클래스 예시
 
 ```swift
-func doubleEven(_ num: Int) ->  Int? {
-  if num.isMultiple(of: 2) {
-    return num * 2
+class Person{
+
+  var name: String = ""
+  var age: Int = 0
+
+  var introduction: String {
+    return "이름 : \(name), 나이 : \(age)"
   }
-  return nil
+
+
+  func speck(){
+print("가 나 다 라 마 바 사")
+  }
+
 }
 
-Optional(3).flatMap(doubleEven)
+
+
+let youngsik: Person = Person()
+
+youngsik.name = "youngsik"
+youngsik.age = 28
+
+print(youngsik.introduction) // 이름 : 나이 출력
+
+youngsik.speck() // 가나다라마사밧
+```
+
+- 예시 2
+
+```swift
+class Vehicle{ //탈 것.
+
+
+  var currentSPeed = 0.0 //의 프로퍼티를 갖고 있고 
+  var description: String { // description을 계산된 프로퍼티로 선언
+
+    return "traveling at \(currentSPeed) miles per hour"
+ 
+  }
+  func makeNoise(){ // 이 메소드를 갖고 이 클래스를 이용해 탈 것 객체를 하나 생성합니다.
+
+  let someVehicle = Vehicle()
+  
+
+  print("Vehicle: \(someVehicle.descirption)")
+  }
+}
 ```
 
 
-## 컨텍스트
-
-컨텍스트의 사전적 정의를 보면 `맥락`, `전후 사정` 등입니다. `콘첸츠`를 담은 그 무엇인가를 뜻합니다. 즉, 물컵에 물이 담겨져 있으면 물은 `콘텐츠`고 물 컵은 `컨텍스트`라고 볼 수 있습니다.
 
 
+# 서브클래싱(Subclassing)
+
+- 상속, 다시 말해 서브클래싱을 하면 부모로부터 성격을 상속받고 자기 자신 고유의 특성도 추가할 수 있다.
+
+```Swift
+
+class SomeSubclass: SomeSuperclass{
+  // subclass definition goes here 
+}
+```
