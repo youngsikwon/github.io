@@ -87,3 +87,48 @@ class SomeSubclass: SomeSuperclass{
   // subclass definition goes here 
 }
 ```
+
+위 탈것을 서브클래싱에 자전거라는 클래스를 선언하면 코드는 다음과 같습니다.
+
+```swift
+
+class Bicycle: Vehicle{
+  var hasBasket = false
+}
+
+```
+
+`Bicycle` 객체를 생성해 고유 속성을 사용할 수 있는 것을 확인할 수 있다.
+
+```swift
+bicycle.currentSpeed = 15.0
+print("Bicycle: \(bicycle.description)")
+// Bicycle: traveling at 15.0 miles per hour
+```
+
+물론 부모로부터 물렵다은 `currentSpeed`, `description`속성도 사용 가능합니다. 서브클래스로 생성된 클래스를 다시 서브클래싱 하는 것도 가능합니다.
+
+```swift
+class Tandem: Bicycle{
+  var currentNumberOfPassengers = 0
+}
+```
+
+`Bicycle`을 서브클래싱해서 `Tandem` 이라는 클래스를 생성하고 속성도 추가합니다.
+
+```swift
+let tandem = tandem()
+
+tandem.hasBasket = true
+tandem.currentNumberOfPassengers = 2
+tandem.currentSpeed = 22.0
+print("Tandem : \(tandem.description)")
+// Tandem: traveling at 22.0 miles per hour
+```
+
+위 코드에서 `tendem`객체에서는 `tandem` 객체 고유 속성인 `currentNumberOfPassengers` 와 자신의 부모 `Bicycle`의 속성 그리고 조부모인 `Vehicle` 속성도 모두 사용 가능한 것을 확인할 수 있습니다.
+
+---
+
+
+
