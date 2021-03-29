@@ -27,7 +27,7 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 ### Time Project
 
-#### [태양광 모니터링 시스템[GS인증 연구법인용]] (https://www.notion.so/2019-03-10-GS-TTA-f50b74cec7a54b23baef3901c64dc46a)
+#### [태양광 모니터링 시스템[GS인증 연구법인용]](https://www.notion.so/2019-03-10-GS-TTA-f50b74cec7a54b23baef3901c64dc46a)
 
 - Spring boot, C, Mysql, Javascript
 - DB설계
