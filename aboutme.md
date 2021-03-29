@@ -29,7 +29,7 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 #### [태양광 모니터링 시스템[GS인증 연구법인용]](https://www.notion.so/2019-03-10-GS-TTA-f50b74cec7a54b23baef3901c64dc46a)
 
-- Spring4
+- Spring, Mysql, Mybatis, jQuery, Security
   - DB설계
   - 통계 차트
   - 임베디드 컨트롤러 통해 DB 파싱하는 데이터 수치 표현
@@ -37,7 +37,7 @@ subtitle: Full Stack  개발자를 지향하는 원영식입니다.
 
 #### [온라인 아웃소싱 플랫폼](https://www.notion.so/KOSMO-Cufflink-6f41cc913e104b56bd66d8d1d0efb396)
 
-- Spring, Oracle, Mybatis, jQuery
+- Spring, Oracle, Mybatis, jQuery, Security
 - 회원관리 or DB설계
   - 최적화를 위한 프로시져 작업
   - Join, Hint, sub query, inline view
